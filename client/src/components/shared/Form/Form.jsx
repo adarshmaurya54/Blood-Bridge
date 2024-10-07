@@ -7,7 +7,7 @@ import { handleLogin, handleRegister } from "../../../services/authService";
 function Form({ submitBtn, formTitle, formType }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("donar");
+  const [role, setRole] = useState("donor");
   const [name, setName] = useState("");
   const [organisationName, setOrganisationName] = useState("");
   const [hospitalName, setHospitalName] = useState("");
@@ -156,6 +156,17 @@ function Form({ submitBtn, formTitle, formType }) {
                       onChange={(e) => setEmail(e.target.value)}
                     />
 
+                    {/* Password Input */}
+                    <InputType
+                      labelText="Password"
+                      labelFor="password"
+                      inputType="password"
+                      name="password"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+
                     {/* Name Input */}
                     {(role === "admin" || role === "donor") && (
                       <InputType
@@ -168,17 +179,6 @@ function Form({ submitBtn, formTitle, formType }) {
                         onChange={(e) => setName(e.target.value)}
                       />
                     )}
-
-                    {/* Password Input */}
-                    <InputType
-                      labelText="Password"
-                      labelFor="password"
-                      inputType="password"
-                      name="password"
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
 
                     {/* Organization Name Input */}
                     {role === "organisation" && (
