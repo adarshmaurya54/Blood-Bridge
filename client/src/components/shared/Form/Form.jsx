@@ -140,120 +140,115 @@ function Form({ submitBtn, formTitle, formType }) {
             );
           }
 
-          case formType === "register":
-            {
-              return (
-                <>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {/* Email Input */}
-                    <InputType
-                      labelText="Email"
-                      labelFor="email"
-                      inputType="email"
-                      name="email"
-                      placeholder="Enter your email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
+          case formType === "register": {
+            return (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {/* Email Input */}
+                  <InputType
+                    labelText="Email"
+                    labelFor="email"
+                    inputType="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
 
-                    {/* Password Input */}
-                    <InputType
-                      labelText="Password"
-                      labelFor="password"
-                      inputType="password"
-                      name="password"
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
+                  {/* Password Input */}
+                  <InputType
+                    labelText="Password"
+                    labelFor="password"
+                    inputType="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
 
-                    {/* Name Input */}
-                    {(role === "admin" || role === "donor") && (
-                      <InputType
-                        labelText="Name"
-                        labelFor="name"
-                        inputType="text"
-                        name="name"
-                        placeholder="Enter your name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                      />
-                    )}
-
-                    {/* Organization Name Input */}
-                    {role === "organisation" && (
-                      <InputType
-                        labelText="Organization Name"
-                        labelFor="organisationName"
-                        inputType="text"
-                        name="organisationName"
-                        placeholder="Enter your organization name"
-                        value={organisationName}
-                        onChange={(e) => setOrganisationName(e.target.value)}
-                      />
-                    )}
-                    {/* Hospital Name Input */}
-                    {role === "hospital" && (
-                      <InputType
-                        labelText="Hospital Name"
-                        labelFor="hospitalName"
-                        inputType="text"
-                        name="hospitalName"
-                        placeholder="Enter your hospital name"
-                        value={hospitalName}
-                        onChange={(e) => setHospitalName(e.target.value)}
-                      />
-                    )}
-                    {/* Website Input */}
+                  {/* Name Input */}
+                  {(role === "admin" || role === "donor") && (
                     <InputType
-                      labelText="Website"
-                      labelFor="website"
-                      inputType="url"
-                      name="website"
-                      placeholder="Enter your website URL"
-                      value={website}
-                      onChange={(e) => setWebsite(e.target.value)}
-                    />
-
-                    {/* Address Input */}
-                    <InputType
-                      labelText="Address"
-                      labelFor="address"
+                      labelText="Name"
+                      labelFor="name"
                       inputType="text"
-                      name="address"
-                      placeholder="Enter your address"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
+                      name="name"
+                      placeholder="Enter your name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                     />
+                  )}
 
-                    {/* Phone Input */}
+                  {/* Organization Name Input */}
+                  {role === "organisation" && (
                     <InputType
-                      labelText="Phone"
-                      labelFor="phone"
-                      inputType="tel"
-                      name="phone"
-                      placeholder="Enter your phone number"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      labelText="Organization Name"
+                      labelFor="organisationName"
+                      inputType="text"
+                      name="organisationName"
+                      placeholder="Enter your organization name"
+                      value={organisationName}
+                      onChange={(e) => setOrganisationName(e.target.value)}
                     />
-                  </div>
+                  )}
+                  {/* Hospital Name Input */}
+                  {role === "hospital" && (
+                    <InputType
+                      labelText="Hospital Name"
+                      labelFor="hospitalName"
+                      inputType="text"
+                      name="hospitalName"
+                      placeholder="Enter your hospital name"
+                      value={hospitalName}
+                      onChange={(e) => setHospitalName(e.target.value)}
+                    />
+                  )}
+                  {/* Website Input */}
+                  <InputType
+                    labelText="Website"
+                    labelFor="website"
+                    inputType="url"
+                    name="website"
+                    placeholder="Enter your website URL"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                  />
 
-                  {/* Have an account? Section */}
-                  <div className="text-center mt-4">
-                    <p className="text-gray-700">
-                      Already have an account?{" "}
-                      <Link
-                        to="/login"
-                        className="text-blue-500 hover:underline"
-                      >
-                        Log in
-                      </Link>
-                    </p>
-                  </div>
-                </>
-              );
-            }
-            break;
+                  {/* Address Input */}
+                  <InputType
+                    labelText="Address"
+                    labelFor="address"
+                    inputType="text"
+                    name="address"
+                    placeholder="Enter your address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
+
+                  {/* Phone Input */}
+                  <InputType
+                    labelText="Phone"
+                    labelFor="phone"
+                    inputType="tel"
+                    name="phone"
+                    placeholder="Enter your phone number"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
+
+                {/* Have an account? Section */}
+                <div className="text-center mt-4">
+                  <p className="text-gray-700">
+                    Already have an account?{" "}
+                    <Link to="/login" className="text-blue-500 hover:underline">
+                      Log in
+                    </Link>
+                  </p>
+                </div>
+              </>
+            );
+          }
         }
       })()}
 
@@ -261,7 +256,7 @@ function Form({ submitBtn, formTitle, formType }) {
       <div className="flex justify-center">
         <button
           type="submit"
-          className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          className="bg-blue-500 mt-3  text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none ring-offset-2 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
         >
           {submitBtn}
         </button>

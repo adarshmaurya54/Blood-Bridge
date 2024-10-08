@@ -1,3 +1,6 @@
+import { userLogin, userRegister } from "../redux/features/auth/authActions";
+import store from "../redux/store";
+
 const isValidEmail = (email) => {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailPattern.test(email);
@@ -18,7 +21,7 @@ export const handleLogin = (e, email, password, role) => {
   }
 
   try {
-    console.log("login", e, email, password, role);
+    store.dispatch(userLogin({ role, email, password }));
   } catch (error) {
     console.log(error);
   }
@@ -45,7 +48,6 @@ export const handleRegister = (
     !password ||
     !address ||
     !phone ||
-    !website ||
     !isValidEmail(email)
   ) {
     alert("Please provide all fields");
@@ -65,18 +67,18 @@ export const handleRegister = (
   }
 
   try {
-    console.log(
-      "register",
-      e,
-      name,
-      role,
-      email,
-      password,
-      organisationName,
-      address,
-      phone,
-      hospitalName,
-      website
+    store.dispatch(
+      userRegister({
+        name,
+        role,
+        email,
+        password,
+        organisationName,
+        address,
+        phone,
+        hospitalName,
+        website,
+      })
     );
   } catch (error) {
     console.log(error);
