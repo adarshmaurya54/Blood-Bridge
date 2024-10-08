@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userLogin, userRegister } from "./authActions";
+import { getCurrentUser, userLogin, userRegister } from "./authActions";
 
 // checking if already token 
 const token = localStorage.getItem("token") ? localStorage.getItem("token") : null;
@@ -16,7 +16,7 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    //login user
+    //login user----------------------------------------------
     // if the login action in pending
     builder.addCase(userLogin.pending, (state)=> {
       state.loading = true,
@@ -36,7 +36,7 @@ const authSlice = createSlice({
       state.error = payload
     })
 
-    //register
+    //register----------------------------------------------
 
     // if the register action in pending
     builder.addCase(userRegister.pending, (state)=> {
@@ -52,6 +52,22 @@ const authSlice = createSlice({
 
     // if the login action is failed or rejected
     builder.addCase(userRegister.rejected, (state, {payload})=> {
+      state.loading = false,
+      state.error = payload
+    })
+
+    //current user----------------------------------------------
+    builder.addCase(getCurrentUser.pending, (state)=> {
+      state.loading = true,
+      state.error = null
+    })
+
+    builder.addCase(getCurrentUser.fulfilled, (state, {payload})=> {
+      state.loading = false,
+      state.user = payload.user
+    })
+
+    builder.addCase(getCurrentUser.rejected, (state, {payload})=> {
       state.loading = false,
       state.error = payload
     })
