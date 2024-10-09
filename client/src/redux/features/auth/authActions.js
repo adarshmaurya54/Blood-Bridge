@@ -14,6 +14,7 @@ export const userLogin = createAsyncThunk(
       if (data.success) {
         localStorage.setItem("token", data.token); // data.token, we getting this from the authController.js file from the loginController.
         toast.success(data.message);
+        window.location.replace("/");
       } else {
         toast.error(data.message);
         return rejectWithValue(data.message); // Ensure rejection for unsuccessful response
@@ -73,6 +74,31 @@ export const userRegister = createAsyncThunk(
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+// getting current user...
+export const getCurrentUser = createAsyncThunk(
+  "auth/getCurrentUser",
+  async ({ rejectWithValue }) => {
+    try {
+      const res = await API.get("/auth/current-user");
+      
+      if (res?.data) { // if response contain data field then we have to return the data value
+        return res.data;
+      }      
+    } catch (error) {
+      // Handle server error (like 500 status)
+      if (error.response) {
+        if (error.response.status === 500) {
+          toast.error(error.response.data.message); // 500 error toast
+        }
+        return rejectWithValue(error.response.data.message);
+      } else {
+        toast.error("Something went wrong. Please try again later.");
         return rejectWithValue(error.message);
       }
     }

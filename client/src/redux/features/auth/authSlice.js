@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userLogin, userRegister } from "./authActions";
+import { getCurrentUser, userLogin, userRegister } from "./authActions";
 
-// checking if already token 
-const token = localStorage.getItem("token") ? localStorage.getItem("token") : null;
+// checking if already token
+const token = localStorage.getItem("token")
+  ? localStorage.getItem("token")
+  : null;
 
 const initialState = {
   loading: false,
@@ -16,45 +18,53 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    //login user
+    //login user----------------------------------------------
     // if the login action in pending
-    builder.addCase(userLogin.pending, (state)=> {
-      state.loading = true,
-      state.error = null
-    })
+    builder.addCase(userLogin.pending, (state) => {
+      (state.loading = true), (state.error = null);
+    });
 
     // if the login action is successful
-    builder.addCase(userLogin.fulfilled, (state, {payload})=> {
-      state.loading = false,
-      state.user = payload.user,
-      state.token = payload.token
-    })
+    builder.addCase(userLogin.fulfilled, (state, { payload }) => {
+      (state.loading = false),
+        (state.user = payload.user),
+        (state.token = payload.token);
+    });
 
     // if the login action is failed or rejected
-    builder.addCase(userLogin.rejected, (state, {payload})=> {
-      state.loading = false,
-      state.error = payload
-    })
+    builder.addCase(userLogin.rejected, (state, { payload }) => {
+      (state.loading = false), (state.error = payload);
+    });
 
-    //register
+    //register----------------------------------------------
 
     // if the register action in pending
-    builder.addCase(userRegister.pending, (state)=> {
-      state.loading = true,
-      state.error = null
-    })
+    builder.addCase(userRegister.pending, (state) => {
+      (state.loading = true), (state.error = null);
+    });
 
     // if the login action is successful
-    builder.addCase(userRegister.fulfilled, (state, {payload})=> {
-      state.loading = false,
-      state.user = payload.user
-    })
+    builder.addCase(userRegister.fulfilled, (state, { payload }) => {
+      (state.loading = false), (state.user = payload.user);
+    });
 
     // if the login action is failed or rejected
-    builder.addCase(userRegister.rejected, (state, {payload})=> {
-      state.loading = false,
-      state.error = payload
-    })
+    builder.addCase(userRegister.rejected, (state, { payload }) => {
+      (state.loading = false), (state.error = payload);
+    });
+
+    //current user----------------------------------------------
+    builder.addCase(getCurrentUser.pending, (state) => {
+      (state.loading = true), (state.error = null);
+    });
+
+    builder.addCase(getCurrentUser.fulfilled, (state, { payload }) => {
+      (state.loading = false), (state.user = payload.user);
+    });
+
+    builder.addCase(getCurrentUser.rejected, (state, { payload }) => {
+      (state.loading = false), (state.error = payload);
+    });
   },
 });
 
