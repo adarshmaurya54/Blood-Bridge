@@ -86,16 +86,10 @@ export const getCurrentUser = createAsyncThunk(
   async ({ rejectWithValue }) => {
     try {
       const res = await API.get("/auth/current-user");
-<<<<<<< HEAD
       
       if (res?.data) { // if response contain data field then we have to return the data value
         return res.data;
       }      
-=======
-      if (res?.data) { // if response contain data field then we have to return the data value
-        return res?.data;
-      }
->>>>>>> 0335805a031ec36516bd932c592e9c2d28d50999
     } catch (error) {
       // Handle server error (like 500 status)
       if (error.response) {
