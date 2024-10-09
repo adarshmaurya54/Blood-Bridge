@@ -1,22 +1,21 @@
 import { useState } from "react";
 import banner1 from "../../assets/images/banner1.jpg";
 import Form from "../../components/shared/Form/Form";
+import Spinner from "../../components/shared/Spinner";
+import { useSelector } from "react-redux";
 
-const Login = ({ error, loading }) => {
+
+const Login = () => {
+  const {loading, error} = useSelector(state => state.auth)
   return (
     <>
-      {error && <span className="text-red-500">{alert(error)}</span>}
-      {loading ? (
-        <div className="flex justify-center items-center">
-          <Spinner />
-        </div>
-      ) : (
+        {loading && <Spinner message="Please wait..."/>}
         <div className="flex flex-col md:flex-row h-screen">
           {/* Left Side - Image */}
           <div className="hidden md:block md:w-[50%]">
             <img
               src={banner1}
-              alt="loginImage"
+              alt="loginImage" 
               className="w-full h-full object-contain"
             />
           </div>
@@ -25,7 +24,7 @@ const Login = ({ error, loading }) => {
             <Form submitBtn="Login" formType="login" formTitle="Login Page"/>
           </div>
         </div>
-      )}
+      
     </>
   );
 };
