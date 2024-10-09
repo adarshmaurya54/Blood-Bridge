@@ -49,6 +49,7 @@ const authSlice = createSlice({
     });
 
     // if the login action is failed or rejected
+<<<<<<< HEAD
     builder.addCase(userRegister.rejected, (state, { payload }) => {
       (state.loading = false), (state.error = payload);
     });
@@ -65,6 +66,28 @@ const authSlice = createSlice({
     builder.addCase(getCurrentUser.rejected, (state, { payload }) => {
       (state.loading = false), (state.error = payload);
     });
+=======
+    builder.addCase(userRegister.rejected, (state, {payload})=> {
+      state.loading = false,
+      state.error = payload
+    })
+
+    //current user----------------------------------------------
+    builder.addCase(getCurrentUser.pending, (state)=> {
+      state.loading = true,
+      state.error = null
+    })
+
+    builder.addCase(getCurrentUser.fulfilled, (state, {payload})=> {
+      state.loading = false,
+      state.user = payload.user
+    })
+
+    builder.addCase(getCurrentUser.rejected, (state, {payload})=> {
+      state.loading = false,
+      state.error = payload
+    })
+>>>>>>> 0335805a031ec36516bd932c592e9c2d28d50999
   },
 });
 

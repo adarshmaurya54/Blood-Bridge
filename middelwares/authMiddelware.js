@@ -1,4 +1,4 @@
-const JWT = require('jsonwebtoken')
+const JWT = require("jsonwebtoken")
 
 
 module.exports = async (req, res, next) => {
@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
             if(err){
                 return res.status(401).send({
                     success: false,
-                    message: "auth failed"
+                    message: "auth failed auth"
                 })
             }else{
                 req.body.userId = decode.userId;
