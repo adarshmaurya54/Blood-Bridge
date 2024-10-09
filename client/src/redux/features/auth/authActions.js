@@ -109,8 +109,4 @@ export const getCurrentUser = createAsyncThunk(
       }
     }
   }
-<<<<<<< HEAD
 );
-=======
-);
->>>>>>> 0335805a031ec36516bd932c592e9c2d28d50999
