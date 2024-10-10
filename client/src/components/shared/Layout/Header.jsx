@@ -10,7 +10,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  //function for capitalizing the name
+  // Function for capitalizing the name
   const capitalize = (str) => {
     if (!str) return ""; // Handle empty or undefined names
     return str
@@ -19,46 +19,66 @@ const Header = () => {
       .join(" "); // Join the words back together
   };
 
-  // logout functionality
+  // Logout functionality
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
   };
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev); // Toggle menu state
   };
+
   return (
-    <nav className="bg-gray-800 p-4">
+    <nav className="bg-white relative p-4 h-full flex items-center">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center gap-3">
           {/* BloodBridge Title */}
-          <div className="text-white text-lg font-bold flex items-center">
+          <div className="text-lg font-bold flex items-center">
             <BiDonateBlood className="text-red-600 text-3xl" /> BloodBridge
           </div>
           {/* Home NavLink */}
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive
-                ? "text-white bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-                : "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-            }
-          >
-            Home
-          </NavLink>
+          {["/", "/inventory", "/donor", "/hospital"].map((path, index) => (
+            <div className="hidden md:block" key={index}>
+              <NavLink
+                to={path}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-white bg-black px-3 py-2 rounded-md text-sm font-medium"
+                    : "text-black hover:bg-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                }
+              >
+                {path === "/"
+                  ? "Home"
+                  : path.substring(1).charAt(0).toUpperCase() +
+                    path.substring(2)}
+              </NavLink>
+            </div>
+          ))}
         </div>
 
         <div className="hidden md:flex cursor-pointer items-center space-x-4">
-          <div className="text-white flex items-center">
+          <div className="flex gap-3 items-center">
             <img
               src={userImage}
               alt="User Avatar"
-              className="h-10 w-10 outline-white outline outline-offset-2 outline-1 rounded-full object-cover mr-2" // Styling for rounded image
+              className="h-10 w-10 outline-red-600 outline outline-offset-2 outline-1 rounded-full object-cover mr-2" // Styling for rounded image
             />
-            Welcome, {capitalize(user?.name)}
+            Welcome,{" "}
+            {capitalize(
+              user?.name || user?.hospitalName || user?.organisationName
+            )}
+            <div
+              style={{ paddingTop: "0.1em", paddingBottom: "0.1rem" }}
+              className="text-xs px-3 bg-gray-200 text-gray-800 rounded-full"
+            >
+              {capitalize(user?.role)}
+            </div>
           </div>
-          <button onClick={handleLogout} className="text-black px-3 bg-white py-2 rounded-md text-sm font-medium">
+          <button
+            onClick={handleLogout}
+            className="text-white px-3 bg-black py-2 rounded-md text-sm font-medium"
+          >
             Logout
           </button>
         </div>
@@ -66,26 +86,36 @@ const Header = () => {
         <div className="md:hidden">
           <button
             onClick={toggleMenu}
-            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            className="text-black hover:bg-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
           >
             <RxHamburgerMenu />
           </button>
         </div>
       </div>
+
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden">
-          <div className="flex flex-col mt-2">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-white bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-                  : "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-              }
-            >
-              Home
-            </NavLink>
+        <div className="absolute p-4 w-[100%] top-[70%] left-0">
+          <div className="md:hidden bg-white p-2 border shadow-md mt-2 rounded">
+            <div className="flex gap-1 flex-col">
+              {["/", "/inventory", "/donor", "/hospital"].map((path, index) => (
+                <NavLink
+                  key={index}
+                  to={path}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-white bg-black px-3 py-2 rounded-md text-sm font-medium"
+                      : "text-black hover:bg-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  }
+                  onClick={() => setIsOpen(false)} // Close the menu on link click
+                >
+                  {path === "/"
+                    ? "Home"
+                    : path.substring(1).charAt(0).toUpperCase() +
+                      path.substring(2)}
+                </NavLink>
+              ))}
+            </div>
           </div>
         </div>
       )}

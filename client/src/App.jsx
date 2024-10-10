@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import PublicRoute from "./components/Routes/PublicRoute";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             </PublicRoute>
           }
         />
+         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );
