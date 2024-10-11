@@ -10,9 +10,9 @@ const createInventoryController = async (req, res) => {
     if (!user) {
       throw new Error("User Not found");
     }
-    if (inventoryType === "in" && user.role !== "donar") {
-      throw new Error("Not a donar account");
-    }
+    // if (inventoryType === "in" && user.role !== "donor") {
+    //   throw new Error("Not a donor account");
+    // }
     if (inventoryType === "out" && user.role !== "hospital") {
       throw new Error("Not a hospital");
     }
@@ -41,7 +41,7 @@ const getInventoryController = async (req, res) => {
       .find({
         donar: req.body.userId,
       })
-      .populate("donar")
+      .populate("donor")
       .populate("organisation")
       .sort({ createdAt: -1 });
     return res.status(200).send({

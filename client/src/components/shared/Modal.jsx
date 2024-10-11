@@ -1,13 +1,55 @@
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import InputType from "./Form/InputType";
 
-const Modal = ({modalTitle, buttonName, buttonIcon}) => {
+const Modal = ({ modalTitle, buttonName, buttonIcon }) => {
   const [showModal, setShowModal] = useState(false);
+  const [inventoryType, setInventoryType] = useState("in");
+  const [bloodGroup, setBloodGroup] = useState("");
+  const [quantity, setQuantity] = useState(0);
+  const [email, setEmail] = useState("");
+  const { user } = useSelector((state) => state.auth);
 
+  // Handle Modal toggle
   const toggleModal = () => {
     setShowModal(!showModal);
   };
+
+  // Handle Modal form submission
+  const handleModalSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    // Placeholder for form submission logic (API call, etc.)
+    try {
+      if (!bloodGroup || !quantity || !email) {
+        return alert("Please Provide All Fields");
+      }
+
+      // Placeholder for API call
+      // const { data } = await API.post("/inventory/create-inventory", {
+      //   email,
+      //   organisation: user?._id,
+      //   inventoryType,
+      //   bloodGroup,
+      //   quantity,
+      // });
+
+      // if (data?.success) {
+      //   alert("New Record Created Successfully!");
+      //   window.location.reload();
+      // }
+    } catch (error) {
+      alert("Error submitting the form.");
+      console.log(error);
+    }
+  };
+
+  // Change email label based on inventory type
+  var emailLabel = "Hospital Email";
+  if (inventoryType === "in") {
+    emailLabel = "Donor Email";
+  }
 
   return (
     <>
@@ -34,45 +76,78 @@ const Modal = ({modalTitle, buttonName, buttonIcon}) => {
 
             {/* Modal header */}
             <div className="mb-4 text-lg font-bold text-center">
-              {modalTitle}
+              {modalTitle || "Manage Blood Record"}
             </div>
 
             {/* Modal body (Form) */}
-            <form className="space-y-4">
-              {/* Name Field */}
-              <InputType
-                    labelText="Name"
-                    labelFor="name"
-                    inputType="text"
-                    name="name"
-                    placeholder="Enter your name"
+            <form onSubmit={handleModalSubmit} className="space-y-4">
+              {/* Inventory Type Selection */}
+              <div className="flex items-center">
+                <p className="font-bold">Blood Type: &nbsp;</p>
+                <div className="form-check flex items-center gap-3">
+                  <input
+                    type="radio"
+                    name="inventoryType"
+                    value="in"
+                    id="in"
+                    className="form-check-input"
+                    defaultChecked
+                    onChange={(e) => setInventoryType(e.target.value)}
                   />
+                  <label htmlFor="in" className="form-check-label">
+                    IN
+                  </label>
 
-              {/* Email Field */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-2 mt-1 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Your email"
-                />
+                  <input
+                    type="radio"
+                    name="inventoryType"
+                    value="out"
+                    id="out"
+                    className="form-check-input"
+                    onChange={(e) => setInventoryType(e.target.value)}
+                  />
+                  <label htmlFor="out" className="form-check-label">
+                    OUT
+                  </label>
+                </div>
               </div>
 
-              {/* Password Field */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  className="w-full px-4 py-2 mt-1 border  rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Your password"
-                />
-              </div>
+              {/* Blood Group Selection */}
+              <select
+                className="w-full p-2 border border-gray-300 rounded-md"
+                aria-label="Select Blood Group"
+                onChange={(e) => setBloodGroup(e.target.value)}
+              >
+                <option value="">Select Blood Group</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+              </select>
 
-              {/* Submit Button */}
+              {/* Email Input */}
+              <InputType
+                labelText={emailLabel}
+                labelFor="email"
+                inputType="email"
+                placeholder="user@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              {/* Quantity Input */}
+              <InputType
+                labelText="Quantity (ML)"
+                labelFor="quantity"
+                inputType="number"
+                value={quantity}
+                placeholder="Enter Quantity"
+                onChange={(e) => setQuantity(e.target.value)}
+              />
               <div className="text-center">
                 <button
                   type="submit"
