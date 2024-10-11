@@ -2,14 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Spinner from "../components/shared/Spinner";
 import Layout from "../components/shared/Layout/Layout";
-import blooddonation from "../assets/images/blood-donation.jpg"
+import blooddonation from "../assets/images/blood-donation.jpg";
+import Modal from "../components/shared/Modal";
 
 const HomePage = () => {
   const { loading, error } = useSelector((state) => state.auth);
   return (
-    <Layout>
+    <>
       {loading && <Spinner message="Please wait..." />}
-      <main className="container mx-auto flex flex-col lg:flex-row justify-between items-center py-12 px-6 lg:px-12">
+      <main className="container mx-auto flex flex-col lg:flex-row justify-between items-center md:py-12 md:px-6 lg:px-12">
         {/* Text Section */}
         <div className="lg:w-1/2 space-y-6">
           <h2 className="text-5xl font-extrabold text-gray-800">
@@ -34,8 +35,9 @@ const HomePage = () => {
             className="w-full max-w-xl"
           />
         </div>
+        <Modal />
       </main>
-    </Layout>
+    </>
   );
 };
 
