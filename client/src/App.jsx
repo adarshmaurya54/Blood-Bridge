@@ -10,6 +10,7 @@ import PublicRoute from "./components/Routes/PublicRoute";
 import PageNotFound from "./pages/PageNotFound";
 import Inventory from "./pages/Inventory";
 import Donor from "./pages/Donor";
+import Hospital from "./pages/Hospital";
 
 function App() {
   return (
@@ -39,6 +40,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Donor />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="hospital"
+            element={
+              <ProtectedRoute>
+                <Hospital />
               </ProtectedRoute>
             }
           />

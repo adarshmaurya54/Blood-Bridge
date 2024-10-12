@@ -30,7 +30,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="bg-white relative p-4 h-full flex items-center">
+    <nav className="relative p-4 h-full flex items-center">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center gap-3">
           {/* BloodBridge Title */}
@@ -64,15 +64,15 @@ const Header = () => {
               alt="User Avatar"
               className="h-10 w-10 outline-red-600 outline outline-offset-2 outline-1 rounded-full object-cover mr-2" // Styling for rounded image
             />
-            Welcome,{" "}
-            {capitalize(
-              user?.name || user?.hospitalName || user?.organisationName
-            )}
+            <div className="capitalize">
+              Welcome,{" "}
+              {user?.name || user?.hospitalName || user?.organisationName}
+            </div>
             <div
               style={{ paddingTop: "0.1em", paddingBottom: "0.1rem" }}
-              className="text-xs px-3 bg-gray-200 text-gray-800 rounded-full"
+              className="text-xs px-3 capitalize bg-gray-200 text-gray-800 rounded-full"
             >
-              {capitalize(user?.role)}
+              {user?.role}
             </div>
           </div>
           <button

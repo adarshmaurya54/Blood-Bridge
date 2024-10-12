@@ -1,34 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Spinner from "../components/shared/Spinner";
 import API from "../services/API";
+import Spinner from "../components/shared/Spinner";
 import moment from "moment";
 
-const Donor = () => {
+const Hospital = () => {
   const { loading } = useSelector((state) => state.auth);
   const [data, setData] = useState([]);
   // find donor records
-  const getDonors = async () => {
+  const getHospitals = async () => {
     try {
-      const { data } = await API.get("/inventory/get-donors");
+      const { data } = await API.get("/inventory/get-hospitals");
       if (data?.success) {
-        setData(data?.donors);
+        setData(data?.hospitals);
       }
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    getDonors();
+    getHospitals();
   }, []);
-  
   return (
     <>
       {loading && <Spinner message="Please wait..." />}
       <div className="container mx-auto">
-        <div className="font-bold text-xl">
-          Donors
-        </div>
+        <div className="font-bold text-xl">Hospitals</div>
         <div className="flex mt-3 flex-col">
           <div className="-m-1.5 overflow-x-auto">
             <div className="p-1.5 min-w-full inline-block align-middle">
@@ -56,6 +53,12 @@ const Donor = () => {
                       </th>
                       <th
                         scope="col"
+                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
+                      >
+                        Address
+                      </th>
+                      <th
+                        scope="col"
                         className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
                       >
                         Date
@@ -63,16 +66,19 @@ const Donor = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-black/25 dark:divide-neutral-700">
-                  {data?.map((record) => (
+                    {data?.map((record) => (
                       <tr key={record._id}>
                         <td className="px-6 py-4 capitalize whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                          {record.name || record.organisationName + " (ORG)"}
+                          {record.hospitalName || record.organisationName + " (ORG)"}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
                           {record.email}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
                           +91 {record.phone}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                          {record.address}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm">
                           {moment(record.createdAt).format(
@@ -92,4 +98,4 @@ const Donor = () => {
   );
 };
 
-export default Donor;
+export default Hospital;

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Spinner from "../components/shared/Spinner";
 import Layout from "../components/shared/Layout/Layout";
-import blooddonation from "../assets/images/blood-donation.jpg";
+import blooddonation from "../assets/images/blood-donation.png";
 import Modal from "../components/shared/Modal";
 
 const HomePage = () => {
@@ -35,7 +35,6 @@ const HomePage = () => {
             className="w-full max-w-xl"
           />
         </div>
-        <Modal />
       </main>
     </>
   );

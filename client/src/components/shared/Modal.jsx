@@ -25,7 +25,7 @@ const Modal = ({ modalTitle, buttonName, buttonIcon, getBloodReacords }) => {
     // Placeholder for form submission logic (API call, etc.)
     try {
       if (!bloodGroup || !quantity || !email) {
-        return alert("Please Provide All Fields");
+        return toast.info("Please Provide All Fields");
       }
 
       // Placeholder for API call

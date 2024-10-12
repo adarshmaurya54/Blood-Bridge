@@ -66,8 +66,8 @@ const Inventory = () => {
         <div className="flex mt-3 flex-col">
           <div className="-m-1.5 overflow-x-auto">
             <div className="p-1.5 min-w-full inline-block align-middle">
-              <div className="border rounded-lg max-h-xs overflow-auto dark:border-neutral-700">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+              <div className="border border-black/25 rounded-lg max-h-xs overflow-auto dark:border-neutral-700">
+                <table className="min-w-full divide-y divide-black/25 dark:divide-neutral-700">
                   <thead>
                     <tr>
                       <th
@@ -102,7 +102,7 @@ const Inventory = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
+                  <tbody className="divide-y divide-black/25 dark:divide-neutral-700">
                     {data?.map((record) => (
                       <tr key={record._id}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">

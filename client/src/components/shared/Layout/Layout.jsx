@@ -2,16 +2,18 @@ import React from "react";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
 
-const Layout = ({ children }) => {
+import bgwave from "../../../assets/images/bg1.jpg"
+
+const Layout = () => {
   return (
-    <div className="h-screen">
+    <div style={{backgroundImage: `url(${bgwave})`, backgroundSize: "cover"}} className=" h-screen">
       <div className="header h-[15%]">
         <Header />
       </div>
       <div className="flex flex-1 h-[85%]">
         
         {/* Main Content */}
-        <main className="flex-1 bg-white p-6">
+        <main className="flex-1 p-6 overflow-hidden">
           <Outlet/>
         </main>
       </div>
