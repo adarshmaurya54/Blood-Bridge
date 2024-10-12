@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import PublicRoute from "./components/Routes/PublicRoute";
 import PageNotFound from "./pages/PageNotFound";
 import Inventory from "./pages/Inventory";
+import Donor from "./pages/Donor";
 
 function App() {
   return (
@@ -30,6 +31,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Inventory />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="donor"
+            element={
+              <ProtectedRoute>
+                <Donor />
               </ProtectedRoute>
             }
           />

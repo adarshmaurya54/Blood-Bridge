@@ -5,11 +5,14 @@ const userModel = require("../model/userModel");
 // create inventory
 const createInventoryController = async (req, res) => {
   try {
-    const { email, inventoryType } = req.body; // destructuring email from the request body
+    const { email} = req.body; // destructuring email from the request body
     const user = await userModel.findOne({ email });
 
     if (!user) {
-      throw new Error("User Not found");
+      return res.status(500).send({
+        success: false,
+        message: "User not found!"
+      });
     }
     // if (inventoryType === "in" && user.role !== "donor") {
     //   throw new Error("Not a donor account");
@@ -70,6 +73,8 @@ const createInventoryController = async (req, res) => {
         });
       }
       req.body.hospital = user?.id;
+    }else{
+      req.body.donor = user?._id;
     }
 
     // save record
@@ -115,6 +120,8 @@ const getInventoryController = async (req, res) => {
     });
   }
 };
+
+//get donor records 
 
 module.exports = {
   createInventoryController,

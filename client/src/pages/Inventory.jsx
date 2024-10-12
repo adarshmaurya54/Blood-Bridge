@@ -92,7 +92,7 @@ const Inventory = () => {
                         scope="col"
                         className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
                       >
-                        Donor Email
+                        Donor/Hospital Email
                       </th>
                       <th
                         scope="col"
@@ -114,10 +114,10 @@ const Inventory = () => {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
                           {record.quantity} ml
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                          {record.donorEmail}
+                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm">
+                          {record.email}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm">
                           {moment(record.createdAt).format(
                             "DD/MM/YYYY hh:mm A"
                           )}

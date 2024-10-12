@@ -30,8 +30,7 @@ const Modal = ({ modalTitle, buttonName, buttonIcon, getBloodReacords }) => {
 
       // Placeholder for API call
       const { data } = await API.post("/inventory/create-inventory", {
-        email: user?.email,
-        donorEmail: email,
+        email,
         organisation: user?._id,
         inventoryType,
         bloodGroup,
