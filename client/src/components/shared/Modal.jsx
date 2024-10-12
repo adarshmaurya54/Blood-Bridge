@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import InputType from "./Form/InputType";
+import API from "../../services/API";
+import { toast } from "react-toastify";
 
-const Modal = ({ modalTitle, buttonName, buttonIcon }) => {
+const Modal = ({ modalTitle, buttonName, buttonIcon, getBloodReacords }) => {
   const [showModal, setShowModal] = useState(false);
   const [inventoryType, setInventoryType] = useState("in");
   const [bloodGroup, setBloodGroup] = useState("");
@@ -27,21 +29,27 @@ const Modal = ({ modalTitle, buttonName, buttonIcon }) => {
       }
 
       // Placeholder for API call
-      // const { data } = await API.post("/inventory/create-inventory", {
-      //   email,
-      //   organisation: user?._id,
-      //   inventoryType,
-      //   bloodGroup,
-      //   quantity,
-      // });
+      const { data } = await API.post("/inventory/create-inventory", {
+        email: user?.email,
+        donorEmail: email,
+        organisation: user?._id,
+        inventoryType,
+        bloodGroup,
+        quantity,
+      });
 
-      // if (data?.success) {
-      //   alert("New Record Created Successfully!");
-      //   window.location.reload();
-      // }
+      if (data?.success) {
+        toast.success("New inventory created successfully.");
+        getBloodReacords();
+        setShowModal(false);
+      }
     } catch (error) {
-      alert("Error submitting the form.");
-      console.log(error);
+      if (error.response) {
+        if (error.response.status === 500) {
+          toast.error(error.response.data.message); // 500 error toast
+        }
+      }
+      // console.log();
     }
   };
 
