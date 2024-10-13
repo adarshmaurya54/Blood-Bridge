@@ -1,38 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import API from "../services/API";
 import Spinner from "../components/shared/Spinner";
+import { BiSolidDonateBlood } from "react-icons/bi";
 import moment from "moment";
-import { FaHospitalAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { MdWidgets } from "react-icons/md";
 
-
-const Hospital = () => {
+const Donation = () => {
   const { loading, user } = useSelector((state) => state.auth);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  if(user?.role === "donor") navigate("/")
-  if(user?.role === "hospital") navigate("/")
-  // find donor records
-  const getHospitals = async () => {
+  if (user?.role === "organisation" || user?.role === "hospital") navigate("/");
+  // find donation for donor records
+
+  const getDonationOfDonor = async () => {    
     try {
-      const { data } = await API.get("/inventory/get-hospitals");
+      const { data } = await API.post("/inventory/get-inventory-hospital", {
+        filters: {
+          donor: user?._id,
+          inventoryType: "in",
+        },
+      });
       if (data?.success) {
-        setData(data?.hospitals);
+        setData(data?.inventory);
       }
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    getHospitals();
-  }, []);
+     getDonationOfDonor();
+  }, [user]);
+
   return (
     <>
       {loading && <Spinner message="Please wait..." />}
-      <div className="container mx-auto">        
-        <div className="font-bold flex items-center gap-3 text-2xl"><FaHospitalAlt />
-        Hospitals</div>
+      <div className="container mx-auto">
+        <div className="font-bold flex items-center gap-3 text-2xl">
+          <MdWidgets />
+          Donations
+        </div>
         <div className="flex mt-3 flex-col">
           <div className="-m-1.5 overflow-x-auto">
             <div className="p-1.5 min-w-full inline-block align-middle">
@@ -41,10 +49,22 @@ const Hospital = () => {
                   <thead>
                     <tr>
                       <th
-                        scope="col" 
+                        scope="col"
                         className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
                       >
-                        Name
+                        Blood Group
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
+                      >
+                        Inventory Type
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
+                      >
+                        Quantity
                       </th>
                       <th
                         scope="col"
@@ -56,18 +76,6 @@ const Hospital = () => {
                         scope="col"
                         className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
                       >
-                        Phone
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
-                      >
-                        Address
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
-                      >
                         Date
                       </th>
                     </tr>
@@ -76,18 +84,18 @@ const Hospital = () => {
                     {data?.map((record) => (
                       <tr key={record._id}>
                         <td className="px-6 py-4 capitalize whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                          {record.hospitalName || record.organisationName + " (ORG)"}
+                          {record.bloodGroup}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                          {record.inventoryType}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                          {record.quantity} ml
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
                           {record.email}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                          +91 {record.phone}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                          {record.address}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm">
+                        <td className="px-6 py-4 whitespace-nowrap text-start text-sm">
                           {moment(record.createdAt).format(
                             "DD/MM/YYYY hh:mm A"
                           )}
@@ -105,4 +113,4 @@ const Hospital = () => {
   );
 };
 
-export default Hospital;
+export default Donation;

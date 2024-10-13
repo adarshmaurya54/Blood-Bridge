@@ -1,23 +1,29 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiDonateBlood } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import userImage from "../../../assets/images/user/user.png";
+import { IoIosLogOut } from "react-icons/io";
 
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Function for capitalizing the name
-  const capitalize = (str) => {
-    if (!str) return ""; // Handle empty or undefined names
-    return str
-      .split(" ") // Split the string into words
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize each word
-      .join(" "); // Join the words back together
-  };
+  const paths = (() => {
+    if (user?.role === "donor") {
+      return ["/", "/organisation", "/donation"];
+    } else if (user?.role === "hospital") {
+      return ["/", "/organisation", "/consumer"];
+    } else if (user?.role === "admin") {
+      return ["/", "/organisation"];
+    } else if (user?.role === "organisation") {
+      return ["/", "/analytics", "/inventory", "/donor", "/hospital"];
+    } else {
+      return ["/"]; // Default to home page if no role or unknown role
+    }
+  })();
 
   // Logout functionality
   const handleLogout = () => {
@@ -34,18 +40,20 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center gap-3">
           {/* BloodBridge Title */}
-          <div className="text-lg font-bold flex items-center">
-            <BiDonateBlood className="text-red-600 text-3xl" /> BloodBridge
-          </div>
+          <Link to="/">
+            <div className="text-lg font-bold flex items-center">
+              <BiDonateBlood className="text-red-600 text-3xl" /> BloodBridge
+            </div>
+          </Link>
           {/* Home NavLink */}
-          {["/", "/inventory", "/donor", "/hospital"].map((path, index) => (
+          {paths.map((path, index) => (
             <div className="hidden md:block" key={index}>
               <NavLink
                 to={path}
                 className={({ isActive }) =>
                   isActive
-                    ? "text-white bg-black px-3 py-2 rounded-md text-sm font-medium"
-                    : "text-black hover:bg-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    ? "text-white hover:shadow-md bg-black px-3 py-2 rounded-md text-sm font-medium"
+                    : "text-black hover:shadow-md hover:bg-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 }
               >
                 {path === "/"
@@ -62,7 +70,7 @@ const Header = () => {
             <img
               src={userImage}
               alt="User Avatar"
-              className="h-10 w-10 outline-red-600 outline outline-offset-2 outline-1 rounded-full object-cover mr-2" // Styling for rounded image
+              className="h-10 w-10 outline-black outline outline-offset-2 outline-1 rounded-full object-cover mr-2" // Styling for rounded image
             />
             <div className="capitalize">
               Welcome,{" "}
@@ -77,9 +85,12 @@ const Header = () => {
           </div>
           <button
             onClick={handleLogout}
-            className="text-white px-3 bg-black py-2 rounded-md text-sm font-medium"
+            className="text-white flex justify-center px-3 hover:shadow-md bg-black py-2 rounded-md text-sm font-medium"
           >
-            Logout
+            <div className="flex items-center gap-2">
+              <IoIosLogOut className="text-lg" />
+              Logout
+            </div>
           </button>
         </div>
 
@@ -96,9 +107,9 @@ const Header = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="absolute p-4 w-[100%] top-[70%] left-0">
-          <div className="md:hidden bg-white p-2 border shadow-md mt-2 rounded">
+          <div className="md:hidden bg-white p-2 border shadow-md mt-2 rounded-md">
             <div className="flex gap-1 flex-col">
-              {["/", "/inventory", "/donor", "/hospital"].map((path, index) => (
+              {paths.map((path, index) => (
                 <NavLink
                   key={index}
                   to={path}
@@ -115,6 +126,34 @@ const Header = () => {
                       path.substring(2)}
                 </NavLink>
               ))}
+            </div>
+            <div className="flex flex-col cursor-pointer mt-4 space-y-4">
+              <div className="flex gap-3 items-center">
+                <img
+                  src={userImage}
+                  alt="User Avatar"
+                  className="h-10 w-10 outline-black outline outline-offset-2 outline-1 rounded-full object-cover mr-2" // Styling for rounded image
+                />
+                <div className="capitalize">
+                  Welcome,{" "}
+                  {user?.name || user?.hospitalName || user?.organisationName}
+                </div>
+                <div
+                  style={{ paddingTop: "0.1em", paddingBottom: "0.1rem" }}
+                  className="text-xs px-3 capitalize bg-gray-200 text-gray-800 rounded-full"
+                >
+                  {user?.role}
+                </div>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="text-white flex justify-center px-3 hover:shadow-md bg-black py-2 rounded-md text-sm font-medium"
+              >
+                <div className="flex items-center gap-2">
+                  <IoIosLogOut className="text-lg" />
+                  Logout
+                </div>
+              </button>
             </div>
           </div>
         </div>

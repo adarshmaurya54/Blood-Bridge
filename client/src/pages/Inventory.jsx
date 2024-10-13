@@ -6,10 +6,14 @@ import Modal from "../components/shared/Modal"; // Import your Modal component
 import API from "../services/API";
 import { toast } from "react-toastify";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const Inventory = () => {
-  const { loading } = useSelector((state) => state.auth);
+  const { loading, user } = useSelector((state) => state.auth);
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
+  if(user?.role === "donor") navigate("/")
+  if(user?.role === "hospital") navigate("/")
   const inputFields = [
     {
       labelText: "Name",

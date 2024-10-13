@@ -11,6 +11,10 @@ import PageNotFound from "./pages/PageNotFound";
 import Inventory from "./pages/Inventory";
 import Donor from "./pages/Donor";
 import Hospital from "./pages/Hospital";
+import Organisation from "./pages/Organisation";
+import Consumer from "./pages/Consumer";
+import Donation from "./pages/Donation";
+import Analytics from "./pages/Analytics";
 
 function App() {
   return (
@@ -48,6 +52,38 @@ function App() {
             element={
               <ProtectedRoute>
                 <Hospital />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="organisation"
+            element={
+              <ProtectedRoute>
+                <Organisation />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="consumer"
+            element={
+              <ProtectedRoute>
+                <Consumer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="donation"
+            element={
+              <ProtectedRoute>
+                <Donation />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/analytics"
+            element={
+              <ProtectedRoute>
+                <Analytics />
               </ProtectedRoute>
             }
           />

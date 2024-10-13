@@ -3,10 +3,16 @@ import { useSelector } from "react-redux";
 import Spinner from "../components/shared/Spinner";
 import API from "../services/API";
 import moment from "moment";
+import { BiSolidDonateBlood } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
+
+
 
 const Donor = () => {
-  const { loading } = useSelector((state) => state.auth);
+  const { loading, user } = useSelector((state) => state.auth);
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
+  if(user?.role === "hospital") navigate("/")
   // find donor records
   const getDonors = async () => {
     try {
@@ -26,9 +32,7 @@ const Donor = () => {
     <>
       {loading && <Spinner message="Please wait..." />}
       <div className="container mx-auto">
-        <div className="font-bold text-xl">
-          Donors
-        </div>
+      <div className="font-bold flex items-center gap-3 text-2xl"><BiSolidDonateBlood />Donors</div>
         <div className="flex mt-3 flex-col">
           <div className="-m-1.5 overflow-x-auto">
             <div className="p-1.5 min-w-full inline-block align-middle">

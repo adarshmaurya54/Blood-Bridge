@@ -1,38 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import API from "../services/API";
+import { useNavigate } from "react-router-dom";
 import Spinner from "../components/shared/Spinner";
 import moment from "moment";
-import { FaHospitalAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import API from "../services/API";
+import { CgOrganisation } from "react-icons/cg";
 
-
-const Hospital = () => {
+const Organisation = () => {
   const { loading, user } = useSelector((state) => state.auth);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  if(user?.role === "donor") navigate("/")
-  if(user?.role === "hospital") navigate("/")
+  if (user?.role === "organisation") navigate("/");
   // find donor records
-  const getHospitals = async () => {
+  const getOrganisations = async () => {
     try {
-      const { data } = await API.get("/inventory/get-hospitals");
-      if (data?.success) {
-        setData(data?.hospitals);
+      if (user?.role === "donor") {
+        const { data } = await API.get("/inventory/get-organisations");
+        if (data?.success) {
+          setData(data?.organisations);
+        }
+      }
+      if (user?.role === "hospital") {
+        const { data } = await API.get("/inventory/get-organisations-for-hospital");
+        if (data?.success) {
+          setData(data?.organisations);
+        }
       }
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    getHospitals();
-  }, []);
+    getOrganisations();
+  }, [user]);
   return (
     <>
       {loading && <Spinner message="Please wait..." />}
-      <div className="container mx-auto">        
-        <div className="font-bold flex items-center gap-3 text-2xl"><FaHospitalAlt />
-        Hospitals</div>
+      <div className="container mx-auto">
+        <div className="font-bold flex items-center gap-3 text-2xl">
+          <CgOrganisation />
+          Organisations
+        </div>
         <div className="flex mt-3 flex-col">
           <div className="-m-1.5 overflow-x-auto">
             <div className="p-1.5 min-w-full inline-block align-middle">
@@ -41,7 +49,7 @@ const Hospital = () => {
                   <thead>
                     <tr>
                       <th
-                        scope="col" 
+                        scope="col"
                         className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
                       >
                         Name
@@ -76,7 +84,7 @@ const Hospital = () => {
                     {data?.map((record) => (
                       <tr key={record._id}>
                         <td className="px-6 py-4 capitalize whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
-                          {record.hospitalName || record.organisationName + " (ORG)"}
+                          {record.organisationName + " (ORG)"}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
                           {record.email}
@@ -105,4 +113,4 @@ const Hospital = () => {
   );
 };
 
-export default Hospital;
+export default Organisation;
