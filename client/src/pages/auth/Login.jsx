@@ -3,10 +3,15 @@ import banner1 from "../../assets/images/banner1.jpg";
 import Form from "../../components/shared/Form/Form";
 import Spinner from "../../components/shared/Spinner";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
-  const {loading, error} = useSelector(state => state.auth)
+  const {loading, error, user} = useSelector(state => state.auth)
+  const navigate = useNavigate();
+  if(user){
+    navigate("/");
+  }
   return (
     <>
         {loading && <Spinner message="Please wait..."/>}
@@ -20,7 +25,7 @@ const Login = () => {
             />
           </div>
           {/* Right Side - Form */}
-          <div className="flex flex-col justify-center items-center md:w-[50%] bg-blue-100 p-8 md:h-auto h-full">
+          <div className="flex flex-col justify-center items-center md:w-[50%] bg-blue-100 p-3 md:h-auto h-full">
             <Form submitBtn="Login" formType="login" formTitle="Login Page"/>
           </div>
         </div>

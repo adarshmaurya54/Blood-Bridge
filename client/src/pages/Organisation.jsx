@@ -83,16 +83,16 @@ const Organisation = () => {
                   <tbody className="divide-y divide-black/25 dark:divide-neutral-700">
                     {data?.map((record) => (
                       <tr key={record._id}>
-                        <td className="px-6 py-4 capitalize whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                        <td className="px-6 py-4 capitalize whitespace-nowrap text-sm font-medium text-gray-800 ">
                           {record.organisationName + " (ORG)"}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
                           {record.email}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
                           +91 {record.phone}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
                           {record.address}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm">

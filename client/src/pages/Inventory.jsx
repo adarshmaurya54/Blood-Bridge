@@ -109,13 +109,13 @@ const Inventory = () => {
                   <tbody className="divide-y divide-black/25 dark:divide-neutral-700">
                     {data?.map((record) => (
                       <tr key={record._id}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                           {record.bloodGroup}
                         </td>
-                        <td className="px-6 py-4 uppercase whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                        <td className="px-6 py-4 uppercase whitespace-nowrap text-sm text-gray-800">
                           {record.inventoryType}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                           {record.quantity} ml
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm">

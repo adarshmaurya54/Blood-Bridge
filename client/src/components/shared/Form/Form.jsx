@@ -32,7 +32,7 @@ function Form({ submitBtn, formTitle, formType }) {
             website
           );
       }}
-      className="w-[90%] bg-white shadow-lg rounded-lg p-6"
+      className="md:w-[90%] bg-white shadow-lg rounded-lg p-6"
     >
       <h2 className="text-2xl font-bold mb-6 text-center">{formTitle}</h2>
       {/* switch statement for login and registration page */}

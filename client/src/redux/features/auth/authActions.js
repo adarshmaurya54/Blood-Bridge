@@ -14,7 +14,6 @@ export const userLogin = createAsyncThunk(
       if (data.success) {
         localStorage.setItem("token", data.token); // data.token, we getting this from the authController.js file from the loginController.
         toast.success(data.message);
-        window.location.replace("/"); 
       } else {
         toast.error(data.message);
         return rejectWithValue(data.message); // Ensure rejection for unsuccessful response

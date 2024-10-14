@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiDonateBlood } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import userImage from "../../../assets/images/user/user.png";
 import { IoIosLogOut } from "react-icons/io";
+import { LiaTimesSolid } from "react-icons/lia";
+import { toggleHamburger } from "../../../redux/features/hamburger/hamburgerSlice";  
+import { toast } from "react-toastify";
 
 const Header = () => {
+  const isOpen = useSelector((state) => state.hamburger.isOpen);  // Get hamburger state
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const paths = (() => {
@@ -17,22 +21,18 @@ const Header = () => {
     } else if (user?.role === "hospital") {
       return ["/", "/organisation", "/consumer"];
     } else if (user?.role === "admin") {
-      return ["/", "/organisation"];
+      return ["/", "/donor-list", "/hospital-list", "/organisation-list"];
     } else if (user?.role === "organisation") {
       return ["/", "/analytics", "/inventory", "/donor", "/hospital"];
     } else {
-      return ["/"]; // Default to home page if no role or unknown role
+      return ["/"];
     }
   })();
 
-  // Logout functionality
   const handleLogout = () => {
     localStorage.clear();
+    toast.success("Successfully logged out!");
     navigate("/login");
-  };
-
-  const toggleMenu = () => {
-    setIsOpen((prev) => !prev); // Toggle menu state
   };
 
   return (
@@ -42,7 +42,7 @@ const Header = () => {
           {/* BloodBridge Title */}
           <Link to="/">
             <div className="text-lg font-bold flex items-center">
-              <BiDonateBlood className="text-red-600 text-3xl" /> BloodBridge
+              <BiDonateBlood className="text-red-600 text-3xl" /> Blood Bridge
             </div>
           </Link>
           {/* Home NavLink */}
@@ -58,6 +58,12 @@ const Header = () => {
               >
                 {path === "/"
                   ? "Home"
+                  : path === "/donor-list"
+                  ? "Donor List"
+                  : path === "/hospital-list"
+                  ? "Hospital List"
+                  : path === "/organisation-list"
+                  ? "Organisation List"
                   : path.substring(1).charAt(0).toUpperCase() +
                     path.substring(2)}
               </NavLink>
@@ -70,7 +76,7 @@ const Header = () => {
             <img
               src={userImage}
               alt="User Avatar"
-              className="h-10 w-10 outline-black outline outline-offset-2 outline-1 rounded-full object-cover mr-2" // Styling for rounded image
+              className="h-10 w-10 outline-black outline outline-offset-2 outline-1 rounded-full object-cover mr-2"
             />
             <div className="capitalize">
               Welcome,{" "}
@@ -96,17 +102,17 @@ const Header = () => {
 
         <div className="md:hidden">
           <button
-            onClick={toggleMenu}
-            className="text-black hover:bg-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            onClick={() => dispatch(toggleHamburger())}  // Dispatch toggleHamburger action
+            className="text-black hover:bg-black hover:text-white px-3 py-2 rounded-md text-2xl font-medium"
           >
-            <RxHamburgerMenu />
+            {isOpen ? <LiaTimesSolid /> : <RxHamburgerMenu />}  {/* Show appropriate icon */}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="absolute p-4 w-[100%] top-[70%] left-0">
+        <div className="absolute z-50 p-4 w-[100%] top-[70%] left-0">
           <div className="md:hidden bg-white p-2 border shadow-md mt-2 rounded-md">
             <div className="flex gap-1 flex-col">
               {paths.map((path, index) => (
@@ -118,7 +124,7 @@ const Header = () => {
                       ? "text-white bg-black px-3 py-2 rounded-md text-sm font-medium"
                       : "text-black hover:bg-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   }
-                  onClick={() => setIsOpen(false)} // Close the menu on link click
+                  onClick={() => dispatch(toggleHamburger())}  // Close the menu when a link is clicked
                 >
                   {path === "/"
                     ? "Home"
@@ -128,13 +134,13 @@ const Header = () => {
               ))}
             </div>
             <div className="flex flex-col cursor-pointer mt-4 space-y-4">
-              <div className="flex gap-3 items-center">
+              <div className="flex gap-2 justify-between items-center">
                 <img
                   src={userImage}
                   alt="User Avatar"
-                  className="h-10 w-10 outline-black outline outline-offset-2 outline-1 rounded-full object-cover mr-2" // Styling for rounded image
+                  className="h-10 w-10 outline-black outline outline-offset-2 outline-1 rounded-full object-cover mr-2"
                 />
-                <div className="capitalize">
+                <div className="capitalize text-xs">
                   Welcome,{" "}
                   {user?.name || user?.hospitalName || user?.organisationName}
                 </div>

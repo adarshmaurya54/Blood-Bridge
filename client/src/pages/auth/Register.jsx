@@ -21,7 +21,7 @@ function Register() {
           />
         </div>
         {/* Right Side - Form */}
-        <div className="flex overflow-auto md:pt-0 pt-60 flex-col justify-center items-center md:w-2/3 bg-blue-100 p-2 md:h-auto h-full">
+        <div className="flex overflow-auto md:pt-0 pt-0 flex-col justify-center items-center md:w-2/3 bg-blue-100 p-2 md:h-auto h-full">
           <Form
             submitBtn="Register"
             formType="register"
