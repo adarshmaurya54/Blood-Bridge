@@ -54,19 +54,20 @@ const Hospital = () => {
                       </th>
                       <th
                         scope="col"
+                        
                         className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
                       >
                         Phone
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
+                        className="px-6 w-[40%] py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
                       >
                         Address
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
+                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
                       >
                         Date
                       </th>
@@ -78,16 +79,16 @@ const Hospital = () => {
                         <td className="px-6 py-4 capitalize whitespace-nowrap text-sm font-medium text-gray-800 ">
                           {record.hospitalName || record.organisationName + " (ORG)"}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
+                        <td className="px-6 py-4  text-sm text-gray-800 ">
                           {record.email}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
+                        <td className="px-6 py-4  text-sm text-gray-800 ">
                           +91 {record.phone}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
+                        <td className="px-6 py-4  text-sm text-gray-800 ">
                           {record.address}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm">
+                        <td className="px-6 py-4 text-sm">
                           {moment(record.createdAt).format(
                             "DD/MM/YYYY hh:mm A"
                           )}

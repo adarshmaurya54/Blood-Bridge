@@ -12,6 +12,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 // Register chart.js components
 ChartJS.register(
@@ -25,6 +27,8 @@ ChartJS.register(
 );
 
 const Analytics = () => {
+  const {user} = useSelector(state => state.auth)
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [inventoryData, setInventoryData] = useState([]);
   // colors for blood card record
@@ -38,6 +42,10 @@ const Analytics = () => {
     "bg-indigo-200",
     "bg-white",
   ];
+
+  if(user?.role === "donor" || user?.role === "admin" || user?.role === "hospital"){
+    navigate("/");
+  }
 
   // GET BLOOD GROUP DATA
   const getBloodGroupData = async () => {

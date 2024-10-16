@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import userImage from "../../../assets/images/user/user.png";
 import { IoIosLogOut } from "react-icons/io";
 import { LiaTimesSolid } from "react-icons/lia";
-import { toggleHamburger } from "../../../redux/features/hamburger/hamburgerSlice";  
+import { toggleHamburger } from "../../../redux/features/hamburger/hamburgerSlice";
 import { toast } from "react-toastify";
 
 const Header = () => {
-  const isOpen = useSelector((state) => state.hamburger.isOpen);  // Get hamburger state
+  const isOpen = useSelector((state) => state.hamburger.isOpen); // Get hamburger state
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -102,10 +102,11 @@ const Header = () => {
 
         <div className="md:hidden">
           <button
-            onClick={() => dispatch(toggleHamburger())}  // Dispatch toggleHamburger action
+            onClick={() => dispatch(toggleHamburger())} // Dispatch toggleHamburger action
             className="text-black hover:bg-black hover:text-white px-3 py-2 rounded-md text-2xl font-medium"
           >
-            {isOpen ? <LiaTimesSolid /> : <RxHamburgerMenu />}  {/* Show appropriate icon */}
+            {isOpen ? <LiaTimesSolid /> : <RxHamburgerMenu />}{" "}
+            {/* Show appropriate icon */}
           </button>
         </div>
       </div>
@@ -124,7 +125,7 @@ const Header = () => {
                       ? "text-white bg-black px-3 py-2 rounded-md text-sm font-medium"
                       : "text-black hover:bg-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   }
-                  onClick={() => dispatch(toggleHamburger())}  // Close the menu when a link is clicked
+                  onClick={() => dispatch(toggleHamburger())} // Close the menu when a link is clicked
                 >
                   {path === "/"
                     ? "Home"
@@ -135,14 +136,16 @@ const Header = () => {
             </div>
             <div className="flex flex-col cursor-pointer mt-4 space-y-4">
               <div className="flex gap-2 justify-between items-center">
-                <img
-                  src={userImage}
-                  alt="User Avatar"
-                  className="h-10 w-10 outline-black outline outline-offset-2 outline-1 rounded-full object-cover mr-2"
-                />
-                <div className="capitalize text-xs">
-                  Welcome,{" "}
-                  {user?.name || user?.hospitalName || user?.organisationName}
+                <div className="flex items-center">
+                  <img
+                    src={userImage}
+                    alt="User Avatar"
+                    className="h-10 w-10 outline-black outline outline-offset-2 outline-1 rounded-full object-cover mr-2"
+                  />
+                  <div className="capitalize text-xs">
+                    Welcome,{" "}
+                    {user?.name || user?.hospitalName || user?.organisationName}
+                  </div>
                 </div>
                 <div
                   style={{ paddingTop: "0.1em", paddingBottom: "0.1rem" }}
