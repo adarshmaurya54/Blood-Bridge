@@ -85,13 +85,13 @@ const Consumer = () => {
                             {record.bloodGroup}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
-                            {record.inventoryType}
+                            {record.inventoryType === "out" ? "IN": "OUT"}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
                             {record.quantity} ml
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
-                            {record.email}
+                            {record.organisation.email}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-start text-sm">
                             {moment(record.createdAt).format(

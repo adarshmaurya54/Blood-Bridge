@@ -100,7 +100,6 @@ const updateUserController = async (req, res) => {
       new: true, 
       runValidators: true
     });
-    console.log("user",req.body);
     
     if (!updatedUser) {
       return res.status(404).send({
