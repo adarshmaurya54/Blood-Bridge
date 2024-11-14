@@ -14,6 +14,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  
 
   const paths = (() => {
     if (user?.role === "donor") {
@@ -36,7 +37,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="relative p-4 h-full flex items-center">
+    <nav className="relative py-4 h-full flex items-center">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center gap-3">
           {/* BloodBridge Title */}
@@ -113,7 +114,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="absolute z-50 p-4 w-[100%] top-[70%] left-0">
+        <div className="absolute z-50 py-4 w-[100%] top-[70%] left-0">
           <div className="md:hidden bg-white p-2 border shadow-md mt-2 rounded-md">
             <div className="flex gap-1 flex-col">
               {paths.map((path, index) => (

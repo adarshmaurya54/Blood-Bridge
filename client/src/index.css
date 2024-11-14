@@ -3,11 +3,21 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-        @apply font-poppins;
-    }
+  body {
+    @apply font-poppins;
+  }
 }
 ::selection {
-    background: black;
-    color: white;
+  background: black;
+  color: white;
+}
+@layer utilities {
+    
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;  
+        scrollbar-width: none;  
   }
+}
