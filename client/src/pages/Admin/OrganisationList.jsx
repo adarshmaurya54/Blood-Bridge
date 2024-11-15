@@ -8,6 +8,7 @@ import Spinner from "../../components/shared/Spinner";
 import { FaEdit, FaTimes, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import InputType from "../../components/shared/Form/InputType";
+import { CgOrganisation } from "react-icons/cg";
 
 const HospitalList = () => {
   const { loading, user } = useSelector((state) => state.auth);
@@ -108,7 +109,7 @@ const HospitalList = () => {
       {loading && <Spinner message="Please wait..." />}
       <div className="container mx-auto">
         <div className="font-bold flex items-center gap-3 text-2xl">
-          <BiSolidDonateBlood />
+          <CgOrganisation />
           Organisation
         </div>
         <div className="flex mt-3 flex-col">

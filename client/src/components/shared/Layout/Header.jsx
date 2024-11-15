@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiDonateBlood } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import userImage from "../../../assets/images/user/user.png";
+import userImage from "../../../assets/images/user/defaultUserDP.gif";
 import { IoIosLogOut } from "react-icons/io";
 import { LiaTimesSolid } from "react-icons/lia";
 import { toggleHamburger } from "../../../redux/features/hamburger/hamburgerSlice";
@@ -42,8 +42,9 @@ const Header = () => {
         <div className="flex items-center gap-3">
           {/* BloodBridge Title */}
           <Link to="/">
-            <div className="text-lg font-bold flex items-center">
-              <BiDonateBlood className="text-red-600 text-3xl" /> Blood Bridge
+            <div className="text-xl font-bold flex items-center">
+              <BiDonateBlood className="text-red-600 text-4xl" /> 
+              <span>Blood Bridge</span>
             </div>
           </Link>
           {/* Home NavLink */}

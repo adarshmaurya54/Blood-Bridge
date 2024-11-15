@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import API from "../../services/API";
 import Spinner from "../../components/shared/Spinner";
-import { FaEdit, FaTimes, FaTrash } from "react-icons/fa";
+import { FaEdit, FaHospitalAlt, FaTimes, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import InputType from "../../components/shared/Form/InputType";
 
@@ -109,7 +109,7 @@ const HospitalList = () => {
       {loading && <Spinner message="Please wait..." />}
       <div className="container mx-auto">
         <div className="font-bold flex items-center gap-3 text-2xl">
-          <BiSolidDonateBlood />
+          <FaHospitalAlt />
           Hospitals
         </div>
         <div className="flex mt-3 flex-col">
