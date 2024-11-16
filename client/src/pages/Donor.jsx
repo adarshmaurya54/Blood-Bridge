@@ -6,13 +6,11 @@ import moment from "moment";
 import { BiSolidDonateBlood } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
-
-
 const Donor = () => {
   const { loading, user } = useSelector((state) => state.auth);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  if(user?.role === "hospital") navigate("/")
+  if (user?.role === "hospital") navigate("/");
   // find donor records
   const getDonors = async () => {
     try {
@@ -27,12 +25,15 @@ const Donor = () => {
   useEffect(() => {
     getDonors();
   }, []);
-  
+
   return (
     <>
       {loading && <Spinner message="Please wait..." />}
       <div className="container mx-auto">
-      <div className="font-bold flex items-center gap-3 text-2xl"><BiSolidDonateBlood />Donors</div>
+        <div className="font-bold flex items-center gap-3 text-2xl dark:text-gray-100">
+          <BiSolidDonateBlood />
+          Donors
+        </div>
         <div className="flex mt-3 flex-col">
           <div className="-m-1.5 overflow-x-auto">
             <div className="p-1.5 min-w-full inline-block align-middle">
@@ -67,18 +68,18 @@ const Donor = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-black/25 dark:divide-neutral-700">
-                  {data?.map((record) => (
+                    {data?.map((record) => (
                       <tr key={record._id}>
-                        <td className="px-6 py-4 capitalize whitespace-nowrap text-sm font-medium text-gray-800 ">
+                        <td className="px-6 py-4 capitalize whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                           {record.name || record.organisationName + " (ORG)"}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                           {record.email}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                           +91 {record.phone}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm">
+                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm text-gray-800 dark:text-gray-200">
                           {moment(record.createdAt).format(
                             "DD/MM/YYYY hh:mm A"
                           )}

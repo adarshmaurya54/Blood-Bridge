@@ -117,13 +117,13 @@ const Analytics = () => {
   };
 
   return (
-    <div className="min-h-screen py-10">
-      <h1 className="text-4xl text-center font-bold text-gray-800 mb-8">
+    <div className="min-h-screen">
+      <h1 className="text-4xl text-center font-bold text-gray-800 dark:text-gray-100">
         Analytics Page
       </h1>
       <div className="flex md:flex-row gap-10 flex-col">
         {/* Bar Chart for In/Out Analysis */}
-        <div className="w-full mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
+        <div className="w-full mx-auto md:my-10 mt-10 mb-[-50px] p-6 bg-white shadow-lg rounded-xl">
           <h2 className="text-2xl text-center font-bold mb-4">
             Blood Group In/Out Analysis
           </h2>
@@ -137,7 +137,7 @@ const Analytics = () => {
         </div>
 
         {/* Pie Chart for Available Blood */}
-        <div className="w-full mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
+        <div className="w-full mx-auto my-10 p-6 bg-white shadow-lg rounded-xl">
           <h2 className="text-2xl text-center font-bold mb-4">
             Available Blood by Blood Group
           </h2>
@@ -151,12 +151,12 @@ const Analytics = () => {
           data.map((record, i) => (
             <div
               key={i}
-              className={`w-80 p-6 rounded-lg shadow-lg ${
+              className={`w-80 p-6 rounded-xl shadow-lg ${
                 colors[i % colors.length]
-              } transition-all hover:scale-105 duration-500 hover:shadow-xl`}
+              } cursor-pointer hover:shadow-xl`}
             >
               <div className="text-center">
-                <h2 className="text-xl font-semibold bg-gray-100 text-gray-800 py-2 mb-4 rounded-lg">
+                <h2 className="text-xl font-semibold bg-gray-100 text-gray-800 py-2 mb-4 rounded-xl">
                   {record.bloodGroup}
                 </h2>
                 <p className="text-lg">
@@ -167,7 +167,7 @@ const Analytics = () => {
                   <span className="font-bold">Total Out:</span>{" "}
                   {record.totalOut} ML
                 </p>
-                <div className="mt-4 bg-gray-800 text-white py-2 rounded-lg">
+                <div className="mt-4 bg-gray-800 text-white py-2 rounded-xl">
                   <span className="font-bold">Total Available:</span>{" "}
                   {record.availableBlood} ML
                 </div>
@@ -181,12 +181,12 @@ const Analytics = () => {
 
       {/* Recent Blood Transactions Table */}
       <div className="my-10">
-        <h1 className="text-3xl font-semibold text-center text-black mb-6">
+        <h1 className="text-3xl font-semibold text-center text-black dark:text-gray-100 mb-6">
           Recent Blood Transactions
         </h1>
         <div className="border border-black/25 rounded-lg max-h-xs overflow-auto dark:border-neutral-700">
-          <table className="min-w-full divide-y divide-black/25 dark:divide-neutral-700">
-            <thead className="bg-black">
+        <table className="min-w-full divide-y divide-black/25 dark:divide-neutral-700 bg-white dark:bg-neutral-800 text-black dark:text-white">
+            <thead className="bg-black dark:bg-gray-700">
               <tr className="text-left text-white font-bold uppercase text-sm">
                 <th className="px-6 py-3">Blood Group</th>
                 <th className="px-6 py-3">Inventory Type</th>

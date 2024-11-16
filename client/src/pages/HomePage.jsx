@@ -11,17 +11,17 @@ const HomePage = () => {
       <main className="container mx-auto flex flex-col lg:flex-row justify-between items-center md:px-12 md:pt-5">
         {/* Text Section */}
         <div className="lg:w-1/2 space-y-6">
-          <h2 className="text-5xl font-extrabold md:leading-none leading-[60px] text-gray-800">
+          <h2 className="text-5xl font-extrabold md:leading-none leading-[60px] dark:text-white text-gray-800">
             Everywhere For Everyone
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 dark:text-gray-400">
             Give blood, give life. Your donation can make a big difference in
             someone's life.
           </p>
           <div className="space-x-4">
             <button
               type="button"
-              className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              className="dark:text-gray-400 text-gray-900 hover:text-white border dark:border-gray-500 border-gray-800 hover:bg-gray-900 hover:dark:bg-white hover:dark:text-black font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
             >
               Read More
             </button>

@@ -21,7 +21,9 @@ const Organisation = () => {
         }
       }
       if (user?.role === "hospital") {
-        const { data } = await API.get("/inventory/get-organisations-for-hospital");
+        const { data } = await API.get(
+          "/inventory/get-organisations-for-hospital"
+        );
         if (data?.success) {
           setData(data?.organisations);
         }
@@ -37,7 +39,7 @@ const Organisation = () => {
     <>
       {loading && <Spinner message="Please wait..." />}
       <div className="container mx-auto">
-        <div className="font-bold flex items-center gap-3 text-2xl">
+        <div className="font-bold flex items-center gap-3 text-2xl dark:text-gray-100">
           <CgOrganisation />
           Organisations
         </div>
@@ -83,19 +85,19 @@ const Organisation = () => {
                   <tbody className="divide-y divide-black/25 dark:divide-neutral-700">
                     {data?.map((record) => (
                       <tr key={record._id}>
-                        <td className="px-6 py-4 capitalize whitespace-nowrap text-sm font-medium text-gray-800 ">
+                        <td className="px-6 py-4 capitalize whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                           {record.organisationName + " (ORG)"}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                           {record.email}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                           +91 {record.phone}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                           {record.address}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm">
+                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm text-gray-800 dark:text-gray-200">
                           {moment(record.createdAt).format(
                             "DD/MM/YYYY hh:mm A"
                           )}

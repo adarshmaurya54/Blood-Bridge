@@ -14,7 +14,7 @@ const Donation = () => {
   if (user?.role === "organisation" || user?.role === "hospital") navigate("/");
   // find donation for donor records
 
-  const getDonationOfDonor = async () => {    
+  const getDonationOfDonor = async () => {
     try {
       const { data } = await API.post("/inventory/get-inventory-hospital", {
         filters: {
@@ -30,14 +30,14 @@ const Donation = () => {
     }
   };
   useEffect(() => {
-     getDonationOfDonor();
+    getDonationOfDonor();
   }, [user]);
 
   return (
     <>
       {loading && <Spinner message="Please wait..." />}
       <div className="container mx-auto">
-        <div className="font-bold flex items-center gap-3 text-2xl">
+        <div className="font-bold dark:text-gray-100 flex items-center gap-3 text-2xl">
           <MdWidgets />
           Donations
         </div>
@@ -83,19 +83,19 @@ const Donation = () => {
                   <tbody className="divide-y divide-black/25 dark:divide-neutral-700">
                     {data?.map((record) => (
                       <tr key={record._id}>
-                        <td className="px-6 py-4 capitalize whitespace-nowrap text-sm font-medium text-gray-800 ">
+                        <td className="px-6 py-4 capitalize whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                           {record.bloodGroup}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                           {record.inventoryType}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                           {record.quantity} ml
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                           {record.email}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-start text-sm">
+                        <td className="px-6 py-4 whitespace-nowrap text-start text-sm text-gray-800 dark:text-gray-200">
                           {moment(record.createdAt).format(
                             "DD/MM/YYYY hh:mm A"
                           )}

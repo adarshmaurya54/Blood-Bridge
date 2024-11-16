@@ -12,8 +12,8 @@ const Inventory = () => {
   const { loading, user } = useSelector((state) => state.auth);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  if(user?.role === "donor") navigate("/")
-  if(user?.role === "hospital") navigate("/")
+  if (user?.role === "donor") navigate("/");
+  if (user?.role === "hospital") navigate("/");
   const inputFields = [
     {
       labelText: "Name",
@@ -76,31 +76,31 @@ const Inventory = () => {
                     <tr>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
+                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-400"
                       >
                         Blood Group
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
+                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-400"
                       >
-                        Invetory Type
+                        Inventory Type
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
+                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-400"
                       >
                         Quantity
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
+                        className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-400"
                       >
                         Donor/Hospital Email
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
+                        className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-400"
                       >
                         Time & Date
                       </th>
@@ -109,19 +109,19 @@ const Inventory = () => {
                   <tbody className="divide-y divide-black/25 dark:divide-neutral-700">
                     {data?.map((record) => (
                       <tr key={record._id}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                           {record.bloodGroup}
                         </td>
-                        <td className="px-6 py-4 uppercase whitespace-nowrap text-sm text-gray-800">
+                        <td className="px-6 py-4 uppercase whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                           {record.inventoryType}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                           {record.quantity} ml
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm">
+                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm text-gray-800 dark:text-gray-200">
                           {record.email}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm">
+                        <td className="px-6 py-4 whitespace-nowrap text-end text-sm text-gray-800 dark:text-gray-200">
                           {moment(record.createdAt).format(
                             "DD/MM/YYYY hh:mm A"
                           )}

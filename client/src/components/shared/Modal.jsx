@@ -63,7 +63,7 @@ const Modal = ({ modalTitle, buttonName, buttonIcon, getBloodReacords }) => {
       {/* Button to open modal */}
       <button
         onClick={toggleModal}
-        className="px-4 py-2 text-white flex gap-2 items-center bg-black rounded-md"
+        className="px-4 py-2 dark:text-black text-white flex gap-2 items-center dark:bg-white bg-black rounded-md"
       >
         {buttonIcon}
         {buttonName}

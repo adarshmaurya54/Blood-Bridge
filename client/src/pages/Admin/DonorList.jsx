@@ -105,7 +105,7 @@ const DonorList = () => {
     <>
       {loading && <Spinner message="Please wait..." />}
       <div className="container mx-auto">
-        <div className="font-bold flex items-center gap-3 text-2xl">
+        <div className="font-bold dark:text-gray-100 flex items-center gap-3 text-2xl">
           <BiSolidDonateBlood />
           Donors
         </div>
@@ -157,24 +157,24 @@ const DonorList = () => {
                   <tbody className="divide-y divide-black/25 dark:divide-neutral-700">
                     {data?.map((record) => (
                       <tr key={record._id}>
-                        <td className="px-6 py-4 capitalize  text-sm font-medium text-gray-800 ">
+                        <td className="px-6 py-4 capitalize text-sm font-medium text-gray-800 dark:text-gray-200">
                           {record.name}
                         </td>
-                        <td className="px-6 py-4  text-sm text-gray-800 ">
+                        <td className="px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
                           {record.email}
                         </td>
-                        <td className="px-6 py-4  text-sm text-gray-800 ">
+                        <td className="px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
                           +91 {record.phone}
                         </td>
-                        <td className="px-6 py-4  text-sm text-gray-800 ">
+                        <td className="px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
                           {record.address}
                         </td>
-                        <td className="px-6 py-4  text-sm">
+                        <td className="px-6 py-4 text-sm text-gray-800 dark:text-gray-200">
                           {moment(record.createdAt).format(
                             "DD/MM/YYYY hh:mm A"
                           )}
                         </td>
-                        <td className="px-6 flex gap-3 py-4  text-sm">
+                        <td className="px-6 flex gap-3 py-4 text-sm">
                           <button
                             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded flex items-center"
                             onClick={() => handleEdit(record)}
@@ -203,7 +203,7 @@ const DonorList = () => {
           <>
             {/* Backdrop */}
             <div
-              className="fixed inset-0 backdrop-blur-md bg-black bg-opacity-50 z-40"
+              className="fixed inset-0 backdrop-blur-sm bg-black/20 z-40"
               onClick={() => setIsEditing(false)}
             ></div>
 
