@@ -71,7 +71,7 @@ const Modal = ({ modalTitle, buttonName, buttonIcon, getBloodReacords }) => {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black backdrop-blur-sm bg-opacity-20">
+        <div className="fixed p-4 md:p-0 inset-0 flex items-center justify-center z-50 bg-black backdrop-blur-sm bg-opacity-20">
           <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-lg shadow-lg">
             {/* Close button */}
             <button

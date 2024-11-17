@@ -32,9 +32,9 @@ function Form({ submitBtn, formTitle, formType }) {
             website
           );
       }}
-      className="md:w-[90%] bg-white shadow-lg rounded-lg p-6"
+      className="md:w-[90%] bg-white dark:bg-slate-700 shadow-lg rounded-lg p-6"
     >
-      <h2 className="text-2xl font-bold mb-6 text-center">{formTitle}</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">{formTitle}</h2>
       {/* switch statement for login and registration page */}
       <div className="flex md:flex-row flex-col justify-between mb-3">
         {/* Donor Radio */}
@@ -48,7 +48,7 @@ function Form({ submitBtn, formTitle, formType }) {
             onChange={(e) => setRole(e.target.value)}
             defaultChecked
           />
-          <label htmlFor="donorRadio" className="ml-2 text-gray-700">
+          <label htmlFor="donorRadio" className="ml-2 dark:text-white text-gray-700">
             Donor
           </label>
         </div>
@@ -63,7 +63,7 @@ function Form({ submitBtn, formTitle, formType }) {
             value="admin"
             onChange={(e) => setRole(e.target.value)}
           />
-          <label htmlFor="adminRadio" className="ml-2 text-gray-700">
+          <label htmlFor="adminRadio" className="ml-2 dark:text-white text-gray-700">
             Admin
           </label>
         </div>
@@ -78,7 +78,7 @@ function Form({ submitBtn, formTitle, formType }) {
             value="hospital"
             onChange={(e) => setRole(e.target.value)}
           />
-          <label htmlFor="hospitalRadio" className="ml-2 text-gray-700">
+          <label htmlFor="hospitalRadio" className="ml-2 dark:text-white text-gray-700">
             Hospital
           </label>
         </div>
@@ -93,7 +93,7 @@ function Form({ submitBtn, formTitle, formType }) {
             value="organisation"
             onChange={(e) => setRole(e.target.value)}
           />
-          <label htmlFor="organisationRadio" className="ml-2 text-gray-700">
+          <label htmlFor="organisationRadio" className="ml-2 dark:text-white text-gray-700">
             Organisation
           </label>
         </div>
@@ -126,7 +126,7 @@ function Form({ submitBtn, formTitle, formType }) {
                 />
                 {/* Don't have an account? Section */}
                 <div className="my-4 text-center">
-                  <p className="text-gray-700">
+                  <p className="text-gray-700 dark:text-white">
                     Don't have an account?{" "}
                     <Link
                       to="/register"
@@ -239,7 +239,7 @@ function Form({ submitBtn, formTitle, formType }) {
 
                 {/* Have an account? Section */}
                 <div className="text-center mt-4">
-                  <p className="text-gray-700">
+                  <p className="text-gray-700 dark:text-white">
                     Already have an account?{" "}
                     <Link to="/login" className="text-blue-500 hover:underline">
                       Log in
