@@ -8,7 +8,7 @@ const Layout = () => {
   const [scrolled, setScrolled] = useState(false);
   const navbarRef = useRef(null);
   const containerRef = useRef(null); // Reference for the scrollable container
-  const isOpen = useSelector((state) => state.hamburger.isOpen);
+  const isOpen = useSelector((state) => state.hamburger.isOpen); // getting the current state of the hamburger
 
   useEffect(() => {
     function handleScroll() {
@@ -37,7 +37,7 @@ const Layout = () => {
     <div
       ref={containerRef} // Attach the ref to the scrollable container
       style={{ backgroundSize: "cover" }}
-      className={`bg-[url(/src/assets/images/bg_light.jpg)] bg-fixed overflow-auto dark:bg-[url(/src/assets/images/bg_dark.jpg)] h-screen`}
+      className={`bg-[url(/src/assets/images/bg_light.jpg)] bg-fixed overflow-auto ${isOpen && "overflow-hidden"} dark:bg-[url(/src/assets/images/bg_dark.jpg)] h-screen`}
     >
       <div
         ref={navbarRef}

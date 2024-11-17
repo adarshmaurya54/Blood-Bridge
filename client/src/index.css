@@ -7,17 +7,23 @@
     @apply font-poppins;
   }
 }
+
 ::selection {
   background: black;
   color: white;
 }
+
+.dark ::selection {
+  background: white;
+  color: black;
+}
+
 @layer utilities {
-    
-    .no-scrollbar::-webkit-scrollbar {
-        display: none;
-    }
-    .no-scrollbar {
-        -ms-overflow-style: none;  
-        scrollbar-width: none;  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
