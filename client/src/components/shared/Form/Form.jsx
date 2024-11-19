@@ -256,7 +256,7 @@ function Form({ submitBtn, formTitle, formType }) {
       <div className="flex justify-center">
         <button
           type="submit"
-          className="bg-blue-500 mt-3  text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none ring-offset-2 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          className="bg-blue-500 mt-3  text-white font-bold py-2 px-4 rounded-[1rem] hover:bg-blue-700 focus:outline-none ring-offset-2 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
         >
           {submitBtn}
         </button>
