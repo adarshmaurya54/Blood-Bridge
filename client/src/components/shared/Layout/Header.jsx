@@ -206,7 +206,7 @@ const Header = () => {
                   <img
                     src={userImage}
                     alt="User Avatar"
-                    className="h-10 w-10 outline-black outline outline-offset-2 outline-1 rounded-full object-cover mr-2"
+                    className="h-10 w-10 rounded-full object-cover mr-2"
                   />
                   <div className="capitalize dark:text-white text-xs">
                     Welcome,{" "}
