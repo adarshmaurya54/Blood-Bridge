@@ -45,7 +45,7 @@ const Header = () => {
     } else if (user?.role === "hospital") {
       return ["/", "/organisation", "/consumer"];
     } else if (user?.role === "admin") {
-      return ["/", "/donor-list", "/hospital-list", "/organisation-list"];
+      return ["/", "/donor-list", "/hospital-list", "/organisation-list", "/inventories"];
     } else if (user?.role === "organisation") {
       return ["/", "/analytics", "/inventory", "/donor", "/hospital"];
     } else {
@@ -77,8 +77,8 @@ const Header = () => {
                 to={path}
                 className={({ isActive }) =>
                   isActive
-                    ? "dark:text-black text-white hover:shadow-md dark:bg-white bg-black px-3 py-2 rounded-md text-sm font-medium"
-                    : "dark:text-white text-black hover:shadow-md hover:bg-black hover:dark:bg-white hover:dark:text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    ? "dark:text-black text-white hover:shadow-md dark:bg-white bg-black px-3 py-2 rounded-xl text-sm font-medium"
+                    : "dark:text-white text-black hover:shadow-md hover:bg-black hover:dark:bg-white hover:dark:text-black hover:text-white px-3 py-2 rounded-xl text-sm font-medium"
                 }
               >
                 {path === "/"
@@ -157,7 +157,7 @@ const Header = () => {
           </div>
           <button
             onClick={handleLogout}
-            className="dark:text-black text-white flex justify-center px-3 hover:shadow-md dark:bg-white bg-black py-2 rounded-md text-sm font-medium"
+            className="dark:text-black text-white flex justify-center px-3 hover:shadow-md dark:bg-white bg-black py-2 rounded-xl text-sm font-medium"
           >
             <div className="flex items-center gap-2">
               <IoIosLogOut className="text-lg" />
@@ -169,7 +169,7 @@ const Header = () => {
         <div className="md:hidden">
           <button
             onClick={() => dispatch(toggleHamburger())} // Dispatch toggleHamburger action
-            className="dark:text-white text-black dark:hover:text-black dark:hover:bg-white hover:bg-black hover:text-white px-3 py-2 rounded-md text-2xl font-medium"
+            className="dark:text-white text-black dark:hover:text-black dark:hover:bg-white hover:bg-black hover:text-white px-3 py-2 rounded-xl text-2xl font-medium"
           >
             {isOpen ? <LiaTimesSolid /> : <RxHamburgerMenu />}{" "}
             {/* Show appropriate icon */}
@@ -179,8 +179,8 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="absolute z-50 py-4 w-[105%] top-[87%] left-[-8px]">
-          <div className="md:hidden dark:bg-black/60 bg-white/60 p-2 border border-gray-200 dark:border-gray-500 shadow-md mt-2 rounded-xl">
+        <div className="absolute z-50 py-4 w-[104%] top-[87%] left-[-8px]">
+          <div className="md:hidden dark:bg-black/60 bg-white/60 p-1 border-[1.5px] border-gray-400 dark:border-gray-500 shadow-md mt-2 rounded-[1rem]">
             <div className="flex gap-1 flex-col">
               {paths.map((path, index) => (
                 <NavLink
@@ -188,8 +188,8 @@ const Header = () => {
                   to={path}
                   className={({ isActive }) =>
                     isActive
-                      ? "dark:text-black text-white dark:bg-white bg-black px-3 py-2 rounded-md text-sm font-medium"
-                      : "dark:text-white text-black hover:bg-black hover:dark:bg-white hover:text-white hover:dark:text-black px-3 py-2 rounded-md text-sm font-medium"
+                      ? "dark:text-black text-white dark:bg-white bg-black px-3 py-2 rounded-xl text-sm font-medium"
+                      : "dark:text-white text-black hover:bg-black hover:dark:bg-white hover:text-white hover:dark:text-black px-3 py-2 rounded-xl text-sm font-medium"
                   }
                   onClick={() => dispatch(toggleHamburger())} // Close the menu when a link is clicked
                 >
@@ -201,7 +201,7 @@ const Header = () => {
               ))}
             </div>
             <div className="flex flex-col cursor-pointer mt-4 space-y-4">
-              <div className="flex gap-2 justify-between items-center">
+              <div className="flex gap-2 px-1 justify-between items-center">
                 <div className="flex items-center">
                   <img
                     src={userImage}
@@ -220,7 +220,7 @@ const Header = () => {
                   {user?.role}
                 </div>
               </div>
-              <div className="">
+              <div className="px-1">
                 <svg
                   onClick={() => handleDarkTheme()}
                   className="w-7 h-7 dark:hidden cursor-pointer"
@@ -265,7 +265,7 @@ const Header = () => {
               </div>
               <button
                 onClick={handleLogout}
-                className="dark:text-black text-white flex justify-center px-3 hover:shadow-md dark:bg-white bg-black py-2 rounded-md text-sm font-medium"
+                className="dark:text-black text-white flex justify-center px-3 hover:shadow-md dark:bg-white bg-black py-2 rounded-xl text-sm font-medium"
               >
                 <div className="flex items-center gap-2">
                   <IoIosLogOut className="text-lg" />

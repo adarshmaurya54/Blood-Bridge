@@ -1,3 +1,4 @@
+const inventoryModel = require("../model/inventoryModel");
 const userModel = require("../model/userModel");
 //get donor lists
 const getDonorsListConstroller = async (req, res) => {
@@ -92,15 +93,14 @@ const deleteUserController = async (req, res) => {
 
 // update hospital
 const updateUserController = async (req, res) => {
-  const { id } = req.params; 
+  const { id } = req.params;
   const updateData = req.body;
   try {
-
     const updatedUser = await userModel.findByIdAndUpdate(id, updateData, {
-      new: true, 
-      runValidators: true
+      new: true,
+      runValidators: true,
     });
-    
+
     if (!updatedUser) {
       return res.status(404).send({
         success: false,
@@ -123,10 +123,68 @@ const updateUserController = async (req, res) => {
   }
 };
 
+const getAllInventories = async (req, res) => {
+  try {
+    const inventories = await inventoryModel
+      .find()
+      .populate("donor")
+      .populate("hospital")
+      .populate("organisation")
+      .sort({ createdAt: -1 }); // Use `await` to resolve the promise
+    if (!inventories || inventories.length === 0) {
+      return res.status(404).send({
+        success: false,
+        message: "No inventory found!",
+      });
+    }
+    return res.status(200).send({
+      success: true,
+      message: `${inventories.length} "Inventories fetched successfully"`,
+      data: inventories,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      success: false,
+      message: `Error in fetching inventory`,
+      error,
+    });
+  }
+};
+
+const deleteInventoryByAdmin = async (req, res) => {
+  try {
+    const inventoryId = req.params.id;
+    const deletedInventory = await inventoryModel.findByIdAndDelete(inventoryId);
+
+    if (!deletedInventory) {
+      return res.status(404).send({
+        success: false,
+        message: "Inventory not found",
+      });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: "Inventory deleted successfully",
+      deletedInventory,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "Error in deleting inventory",
+      error,
+    });
+  }
+};
+
 module.exports = {
   getDonorsListConstroller,
   getHospitalsListConstroller,
   getOrganisationsListConstroller,
   deleteUserController,
-  updateUserController
+  updateUserController,
+  getAllInventories,
+  deleteInventoryByAdmin
 };

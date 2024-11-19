@@ -43,14 +43,14 @@ const Layout = () => {
         ref={navbarRef}
         className={`header ${
           scrolled
-            ? "fixed z-50 w-[97%] md:w-[98.8%] md:px-4 px-2 py-2 transition-all duration-400"
+            ? "fixed z-50 w-[100%] md:w-[98.8%] md:px-4 px-2 py-2 transition-all duration-400"
             : "px-5"
         }`}
       >
         <div
           className={`${
             scrolled &&
-            "dark:bg-black/50 bg-white/70 border dark:border-gray-600 border-gray-200 rounded-xl backdrop-blur-md px-2"
+            "dark:bg-black/50 bg-white/70 border border-gray-400 dark:border-gray-500 rounded-[1rem] backdrop-blur-md px-2"
           }`}
         >
           <Header />
@@ -60,7 +60,7 @@ const Layout = () => {
         {/* Main Content */}
         <main
           className={`flex-1 ${
-            isOpen && "blur-md md:blur-0 overflow-hidden"
+            isOpen && "blur-md md:blur-0 select-none overflow-hidden"
           } md:p-6 p-4 overflow-x-hidden`}
         >
           <Outlet />

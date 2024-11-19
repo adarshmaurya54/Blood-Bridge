@@ -32,6 +32,7 @@ const Donation = () => {
   useEffect(() => {
     getDonationOfDonor();
   }, [user]);
+console.log(data);
 
   return (
     <>
@@ -93,7 +94,7 @@ const Donation = () => {
                           {record.quantity} ml
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                          {record.email}
+                          {record.organisation.email}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-start text-sm text-gray-800 dark:text-gray-200">
                           {moment(record.createdAt).format(

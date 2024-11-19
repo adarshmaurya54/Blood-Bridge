@@ -161,14 +161,14 @@ const HospitalList = () => {
                         </td>
                         <td className="px-6 flex gap-2 py-4 whitespace-nowrap text-sm">
                           <button
-                            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded flex items-center"
+                            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl flex items-center"
                             onClick={() => handleEdit(record)}
                           >
                             <FaEdit className="mr-2" />
                             Update
                           </button>
                           <button
-                            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded flex items-center"
+                            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-xl flex items-center"
                             onClick={() => handleDelete(record._id)}
                           >
                             <FaTrash className="mr-2" />
@@ -194,12 +194,12 @@ const HospitalList = () => {
 
             {/* Modal */}
             <div className="fixed inset-0 flex items-center justify-center z-50">
-              <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
+              <div className="bg-white dark:bg-slate-700 border-2 dark:border-slate-500 border-gray-200 p-6 rounded-lg shadow-lg w-96 relative">
                 <div className="flex justify-between mb-4 items-center">
-                  <h3 className="font-bold text-xl">Update Hospital</h3>
+                  <h3 className="font-bold text-xl dark:text-white">Update Organisation</h3>
                   <button
                     onClick={() => setIsEditing(false)}
-                    className="text-gray-500 hover:text-gray-700"
+                    className="text-gray-500 dark:text-white hover:text-gray-700"
                   >
                     <FaTimes className="text-xl" />
                   </button>
@@ -260,7 +260,7 @@ const HospitalList = () => {
                     <button
                       type="button"
                       onClick={handleUpdate}
-                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl"
                     >
                       Save Changes
                     </button>

@@ -72,24 +72,24 @@ const Modal = ({ modalTitle, buttonName, buttonIcon, getBloodReacords }) => {
       {/* Modal */}
       {showModal && (
         <div className="fixed p-4 md:p-0 inset-0 flex items-center justify-center z-50 bg-black backdrop-blur-sm bg-opacity-20">
-          <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-lg shadow-lg">
+          <div className="relative w-full max-w-lg p-4 mx-auto border-2 dark:border-slate-500 border-gray-200 bg-white dark:bg-slate-700 rounded-xl shadow-lg">
             {/* Close button */}
             <button
               onClick={toggleModal}
-              className="absolute text-xl top-3 right-3 text-gray-500 hover:text-gray-700"
+              className="absolute text-xl top-3 right-3 dark:text-white text-gray-500 hover:text-gray-700"
             >
               <FaTimes />
             </button>
 
             {/* Modal header */}
-            <div className="mb-4 text-lg font-bold text-center">
+            <div className="mb-4 text-lg dark:text-white font-bold text-center">
               {modalTitle || "Manage Blood Record"}
             </div>
 
             {/* Modal body (Form) */}
             <form onSubmit={handleModalSubmit} className="space-y-4">
               {/* Inventory Type Selection */}
-              <div className="flex items-center">
+              <div className="flex items-center dark:text-white">
                 <p className="font-bold">Blood Type: &nbsp;</p>
                 <div className="form-check flex items-center gap-3">
                   <input
@@ -121,7 +121,7 @@ const Modal = ({ modalTitle, buttonName, buttonIcon, getBloodReacords }) => {
 
               {/* Blood Group Selection */}
               <select
-                className="w-full p-2 border border-gray-300 rounded-md"
+                className="bg-gray-50 text-gray-900 text-sm rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none block w-full p-2.5 dark:bg-gray-800 dark:placeholder-gray-500 dark:text-gray-100 dark:focus:ring-gray-500"
                 aria-label="Select Blood Group"
                 onChange={(e) => setBloodGroup(e.target.value)}
               >
@@ -158,7 +158,7 @@ const Modal = ({ modalTitle, buttonName, buttonIcon, getBloodReacords }) => {
               <div className="text-center">
                 <button
                   type="submit"
-                  className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                  className="px-4 py-2 text-white bg-blue-500 rounded-xl hover:bg-blue-600"
                 >
                   Submit
                 </button>

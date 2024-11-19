@@ -6,6 +6,8 @@ const {
   getOrganisationsListConstroller,
   updateUserController,
   deleteUserController,
+  getAllInventories,
+  deleteInventoryByAdmin,
 } = require("../controllers/adminController");
 const adminMiddelware = require("../middelwares/adminMiddelware");
 
@@ -42,8 +44,18 @@ router.delete(
   adminMiddelware,
   deleteUserController
 );
+// Delete inventory by ID
+router.delete(
+  "/inventory/:id",
+  authMiddelware,
+  adminMiddelware,
+  deleteInventoryByAdmin
+);
 
 // Update hospital, donor, organisation by ID
 router.put("/user/:id", authMiddelware, adminMiddelware, updateUserController);
+
+// getting all the invertories on admin side
+router.get("/get-all-inventories", authMiddelware, adminMiddelware, getAllInventories);
 
 module.exports = router;

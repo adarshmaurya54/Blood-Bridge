@@ -2,6 +2,7 @@ const express = require("express");
 const authMiddelware = require("../middelwares/authMiddelware");
 const { createInventoryController, getInventoryController, getDonorsController, getHospitalsController, getOrganisationsController, getOrganisationsForHospitalController, getInventoryHospitalController, getRecentInventoryController } = require("../controllers/inventoryController");
 
+
 const router = express.Router();
 
 //routes

@@ -18,6 +18,7 @@ import Analytics from "./pages/Analytics";
 import DonorList from "./pages/Admin/DonorList";
 import HospitalList from "./pages/Admin/HospitalList";
 import OrganisationList from "./pages/Admin/OrganisationList";
+import Inventories from "./pages/Admin/Inventories";
 
 function App() {
   return (
@@ -111,6 +112,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <OrganisationList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/inventories"
+            element={
+              <ProtectedRoute>
+                <Inventories />
               </ProtectedRoute>
             }
           />
