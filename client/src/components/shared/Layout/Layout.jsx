@@ -60,7 +60,7 @@ const Layout = () => {
         {/* Main Content */}
         <main
           className={`flex-1 ${
-            isOpen && "blur-md md:blur-0 select-none overflow-hidden"
+            isOpen && "blur-md pointer-events-none md:blur-0 select-none overflow-hidden"
           } md:p-6 p-4 overflow-x-hidden`}
         >
           <Outlet />
