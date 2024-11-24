@@ -1,6 +1,5 @@
 const userModel = require("../model/userModel");
 const bcrypt = require("bcryptjs");
-const { red } = require("colors");
 const jwt = require("jsonwebtoken")
 const registerController = async (req, res) => {
   try {
@@ -21,7 +20,7 @@ const registerController = async (req, res) => {
     await user.save();
     return res.status(201).send({
         success: true,
-        message: "User Registration is Successfully",
+        message: "User Registrated Successfully",
         user
     })
   } catch (err) {

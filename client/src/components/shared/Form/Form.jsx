@@ -34,7 +34,9 @@ function Form({ submitBtn, formTitle, formType }) {
       }}
       className="md:w-[90%] bg-white dark:bg-slate-700 shadow-lg rounded-lg p-6"
     >
-      <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">{formTitle}</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">
+        {formTitle}
+      </h2>
       {/* switch statement for login and registration page */}
       <div className="flex md:flex-row flex-col justify-between mb-3">
         {/* Donor Radio */}
@@ -48,25 +50,33 @@ function Form({ submitBtn, formTitle, formType }) {
             onChange={(e) => setRole(e.target.value)}
             defaultChecked
           />
-          <label htmlFor="donorRadio" className="ml-2 dark:text-white text-gray-700">
+          <label
+            htmlFor="donorRadio"
+            className="ml-2 dark:text-white text-gray-700"
+          >
             Donor
           </label>
         </div>
 
         {/* Admin Radio */}
-        <div className="flex items-center mr-4">
-          <input
-            type="radio"
-            className="form-radio h-4 w-4 text-blue-600"
-            name="role"
-            id="adminRadio"
-            value="admin"
-            onChange={(e) => setRole(e.target.value)}
-          />
-          <label htmlFor="adminRadio" className="ml-2 dark:text-white text-gray-700">
-            Admin
-          </label>
-        </div>
+        {formType !== "register" && (
+          <div className="flex items-center mr-4">
+            <input
+              type="radio"
+              className="form-radio h-4 w-4 text-blue-600"
+              name="role"
+              id="adminRadio"
+              value="admin"
+              onChange={(e) => setRole(e.target.value)}
+            />
+            <label
+              htmlFor="adminRadio"
+              className="ml-2 dark:text-white text-gray-700"
+            >
+              Admin
+            </label>
+          </div>
+        )}
 
         {/* Hospital Radio */}
         <div className="flex items-center mr-4">
@@ -78,7 +88,10 @@ function Form({ submitBtn, formTitle, formType }) {
             value="hospital"
             onChange={(e) => setRole(e.target.value)}
           />
-          <label htmlFor="hospitalRadio" className="ml-2 dark:text-white text-gray-700">
+          <label
+            htmlFor="hospitalRadio"
+            className="ml-2 dark:text-white text-gray-700"
+          >
             Hospital
           </label>
         </div>
@@ -93,7 +106,10 @@ function Form({ submitBtn, formTitle, formType }) {
             value="organisation"
             onChange={(e) => setRole(e.target.value)}
           />
-          <label htmlFor="organisationRadio" className="ml-2 dark:text-white text-gray-700">
+          <label
+            htmlFor="organisationRadio"
+            className="ml-2 dark:text-white text-gray-700"
+          >
             Organisation
           </label>
         </div>
@@ -205,7 +221,7 @@ function Form({ submitBtn, formTitle, formType }) {
                   )}
                   {/* Website Input */}
                   <InputType
-                    labelText="Website"
+                    labelText="Website(Optional)"
                     labelFor="website"
                     inputType="url"
                     name="website"
