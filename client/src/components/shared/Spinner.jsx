@@ -1,6 +1,6 @@
 import React from "react";
 
-const Spinner = ({ message, onClose }) => {
+const Spinner = ({ message }) => {
   return (
     <div className="fixed inset-0 md:p-0 p-4 flex items-center justify-center bg-black/20 backdrop-blur-sm z-50">
       <div className="bg-white dark:bg-slate-700 flex flex-col gap-4 items-center justify-center w-[400px] h-[250px] rounded-lg">
