@@ -7,7 +7,7 @@ import Spinner from "../../components/shared/Spinner";
 import { FaEdit, FaHospitalAlt, FaTimes, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import InputType from "../../components/shared/Form/InputType";
-import { MdInventory } from "react-icons/md";
+import { MdInventory, MdOutlineDelete } from "react-icons/md";
 
 const HospitalList = () => {
   const { loading, user } = useSelector((state) => state.auth);
@@ -89,13 +89,13 @@ const HospitalList = () => {
                         scope="col"
                         className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-400"
                       >
-                        Organisation Email(From)
+                        Organisation Email
                       </th>
                       <th
                         scope="col"
                         className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-400"
                       >
-                        Donor/Hospital Email(To)
+                        Donor/Hospital Email
                       </th>
                       <th
                         scope="col"
@@ -124,10 +124,10 @@ const HospitalList = () => {
                           {record.quantity} ml
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm text-gray-800 dark:text-gray-200">
-                          {record.organisation.email}
+                          {record.organisation.email}<p className='font-medium text-xs inline-block ms-1'>(ORG)</p>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm text-gray-800 dark:text-gray-200">
-                          {record.email}
+                          {record.email}{record.donor && <p className='font-medium text-xs inline-block ms-1'>(Donor)</p>}{record.hospital && <p className='font-medium text-xs inline-block ms-1'>(Hospital)</p>}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-end text-sm text-gray-800 dark:text-gray-200">
                           {moment(record.createdAt).format(
@@ -139,6 +139,7 @@ const HospitalList = () => {
                             className="bg-red-500 hover:bg-red-600 text-white font-bold p-2 rounded-xl flex items-center"
                             onClick={() => handleDelete(record._id)}
                           >
+                            <FaTrash className="mr-2" />
                             Delete
                           </button>
                         </td>

@@ -134,7 +134,7 @@ const getDonorsController = async (req, res) => {
     const donorId = await inventoryModel.distinct("donor", {
       organisation,
     }); //This shows you all the unique donors associated with provided organization id.
-    // console.log(donorId);
+    
     const donors = await userModel.find({ _id: { $in: donorId } });
     return res.status(200).send({
       success: true,

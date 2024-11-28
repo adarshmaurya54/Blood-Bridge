@@ -194,7 +194,7 @@ const HospitalList = () => {
 
             {/* Modal */}
             <div className="fixed inset-0 flex items-center justify-center z-50">
-              <div className="bg-white dark:bg-slate-700 border-2 dark:border-slate-500 border-gray-200 p-6 rounded-lg shadow-lg w-96 relative">
+              <div className="bg-white dark:bg-slate-700 border-2 dark:border-slate-500 border-gray-200 p-6 rounded-3xl shadow-lg w-96 relative">
                 <div className="flex justify-between mb-4 items-center">
                   <h3 className="font-bold text-xl dark:text-white">Update Organisation</h3>
                   <button

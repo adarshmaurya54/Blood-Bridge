@@ -14,6 +14,7 @@ import {
 } from "chart.js";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../components/shared/Spinner";
 
 // Register chart.js components
 ChartJS.register(
@@ -27,7 +28,8 @@ ChartJS.register(
 );
 
 const Analytics = () => {
-  const {user} = useSelector(state => state.auth)
+  const { loading } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [inventoryData, setInventoryData] = useState([]);
@@ -43,7 +45,11 @@ const Analytics = () => {
     "bg-white",
   ];
 
-  if(user?.role === "donor" || user?.role === "admin" || user?.role === "hospital"){
+  if (
+    user?.role === "donor" ||
+    user?.role === "admin" ||
+    user?.role === "hospital"
+  ) {
     navigate("/");
   }
 
@@ -117,109 +123,114 @@ const Analytics = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      <h1 className="text-4xl text-center font-bold text-gray-800 dark:text-gray-100">
-        Analytics Page
-      </h1>
-      <div className="flex md:flex-row gap-10 flex-col">
-        {/* Bar Chart for In/Out Analysis */}
-        <div className="w-full mx-auto md:my-10 mt-10 mb-[-50px] p-6 bg-white shadow-lg rounded-xl">
-          <h2 className="text-2xl text-center font-bold mb-4">
-            Blood Group In/Out Analysis
-          </h2>
-          <Bar
-            data={barData}
-            options={{
-              responsive: true,
-              plugins: { legend: { position: "top" } },
-            }}
-          />
+    <>
+    {loading && <Spinner message="Please wait..." />}
+      <div className="min-h-screen">
+        <h1 className="text-4xl text-center font-bold text-gray-800 dark:text-gray-100">
+          Analytics Page
+        </h1>
+        <div className="flex md:flex-row gap-10 flex-col">
+          {/* Bar Chart for In/Out Analysis */}
+          <div className="w-full mx-auto md:my-10 mt-10 mb-[-50px] p-6 bg-white shadow-lg rounded-xl">
+            <h2 className="text-2xl text-center font-bold mb-4">
+              Blood Group In/Out Analysis
+            </h2>
+            <Bar
+              data={barData}
+              options={{
+                responsive: true,
+                plugins: { legend: { position: "top" } },
+              }}
+            />
+          </div>
+
+          {/* Pie Chart for Available Blood */}
+          <div className="w-full mx-auto my-10 p-6 bg-white shadow-lg rounded-xl">
+            <h2 className="text-2xl text-center font-bold mb-4">
+              Available Blood by Blood Group
+            </h2>
+            <Pie data={pieData} options={{ responsive: true }} />
+          </div>
         </div>
 
-        {/* Pie Chart for Available Blood */}
-        <div className="w-full mx-auto my-10 p-6 bg-white shadow-lg rounded-xl">
-          <h2 className="text-2xl text-center font-bold mb-4">
-            Available Blood by Blood Group
-          </h2>
-          <Pie data={pieData} options={{ responsive: true }} />
-        </div>
-      </div>
-
-      {/* Blood Group Cards */}
-      <div className="flex flex-wrap justify-center gap-6 my-8">
-        {data.length > 0 ? (
-          data.map((record, i) => (
-            <div
-              key={i}
-              className={`w-80 p-6 rounded-xl shadow-lg ${
-                colors[i % colors.length]
-              } cursor-pointer hover:shadow-xl`}
-            >
-              <div className="text-center">
-                <h2 className="text-xl font-semibold bg-gray-100 text-gray-800 py-2 mb-4 rounded-xl">
-                  {record.bloodGroup}
-                </h2>
-                <p className="text-lg">
-                  <span className="font-bold">Total In:</span> {record.totalIn}{" "}
-                  ML
-                </p>
-                <p className="text-lg">
-                  <span className="font-bold">Total Out:</span>{" "}
-                  {record.totalOut} ML
-                </p>
-                <div className="mt-4 bg-gray-800 text-white py-2 rounded-xl">
-                  <span className="font-bold">Total Available:</span>{" "}
-                  {record.availableBlood} ML
+        {/* Blood Group Cards */}
+        <div className="flex flex-wrap justify-center gap-6 my-8">
+          {data.length > 0 ? (
+            data.map((record, i) => (
+              <div
+                key={i}
+                className={`w-80 p-6 rounded-xl shadow-lg ${
+                  colors[i % colors.length]
+                } cursor-pointer hover:shadow-xl`}
+              >
+                <div className="text-center">
+                  <h2 className="text-xl font-semibold bg-gray-100 text-gray-800 py-2 mb-4 rounded-xl">
+                    {record.bloodGroup}
+                  </h2>
+                  <p className="text-lg">
+                    <span className="font-bold">Total In:</span>{" "}
+                    {record.totalIn} ML
+                  </p>
+                  <p className="text-lg">
+                    <span className="font-bold">Total Out:</span>{" "}
+                    {record.totalOut} ML
+                  </p>
+                  <div className="mt-4 bg-gray-800 text-white py-2 rounded-xl">
+                    <span className="font-bold">Total Available:</span>{" "}
+                    {record.availableBlood} ML
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <p className="text-gray-500">No data available for blood groups.</p>
-        )}
-      </div>
+            ))
+          ) : (
+            <p className="text-gray-500">No data available for blood groups.</p>
+          )}
+        </div>
 
-      {/* Recent Blood Transactions Table */}
-      <div className="my-10">
-        <h1 className="text-3xl font-semibold text-center text-black dark:text-gray-100 mb-6">
-          Recent Blood Transactions
-        </h1>
-        <div className="border border-black/25 rounded-lg max-h-xs overflow-auto dark:border-neutral-700">
-        <table className="min-w-full divide-y divide-black/25 dark:divide-neutral-700 bg-white dark:bg-neutral-800 text-black dark:text-white">
-            <thead className="bg-black dark:bg-gray-700">
-              <tr className="text-left text-white font-bold uppercase text-sm">
-                <th className="px-6 py-3">Blood Group</th>
-                <th className="px-6 py-3">Inventory Type</th>
-                <th className="px-6 py-3">Quantity</th>
-                <th className="px-6 py-3">Donor Email</th>
-                <th className="px-6 py-3">Time & Date</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-black/25 dark:divide-neutral-700">
-              {inventoryData.length > 0 ? (
-                inventoryData.map((record) => (
-                  <tr key={record._id} className="border-t">
-                    <td className="px-6 py-4">{record.bloodGroup}</td>
-                    <td className="px-6 py-4 uppercase">{record.inventoryType}</td>
-                    <td className="px-6 py-4">{record.quantity} (ML)</td>
-                    <td className="px-6 py-4">{record.email}</td>
-                    <td className="px-6 py-4">
-                      {moment(record.createdAt).format("DD/MM/YYYY hh:mm A")}
+        {/* Recent Blood Transactions Table */}
+        <div className="my-10">
+          <h1 className="text-3xl font-semibold text-center text-black dark:text-gray-100 mb-6">
+            Recent Blood Transactions
+          </h1>
+          <div className="border border-black/25 rounded-lg max-h-xs overflow-auto dark:border-neutral-700">
+            <table className="min-w-full divide-y divide-black/25 dark:divide-neutral-700 bg-white dark:bg-neutral-800 text-black dark:text-white">
+              <thead className="bg-black dark:bg-gray-700">
+                <tr className="text-left text-white font-bold uppercase text-sm">
+                  <th className="px-6 py-3">Blood Group</th>
+                  <th className="px-6 py-3">Inventory Type</th>
+                  <th className="px-6 py-3">Quantity</th>
+                  <th className="px-6 py-3">Donor Email</th>
+                  <th className="px-6 py-3">Time & Date</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-black/25 dark:divide-neutral-700">
+                {inventoryData.length > 0 ? (
+                  inventoryData.map((record) => (
+                    <tr key={record._id} className="border-t">
+                      <td className="px-6 py-4">{record.bloodGroup}</td>
+                      <td className="px-6 py-4 uppercase">
+                        {record.inventoryType}
+                      </td>
+                      <td className="px-6 py-4">{record.quantity} (ML)</td>
+                      <td className="px-6 py-4">{record.email}</td>
+                      <td className="px-6 py-4">
+                        {moment(record.createdAt).format("DD/MM/YYYY hh:mm A")}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td className="px-6 py-4 text-center" colSpan="5">
+                      No recent blood transactions available.
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td className="px-6 py-4 text-center" colSpan="5">
-                    No recent blood transactions available.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

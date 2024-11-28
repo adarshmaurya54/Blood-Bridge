@@ -16,6 +16,7 @@ const DonorList = () => {
   const [editData, setEditData] = useState({
     name: "",
     email: "",
+    address: "",
     phone: "",
   });
   const [selectedDonorId, setSelectedDonorId] = useState(null);
@@ -46,6 +47,7 @@ const DonorList = () => {
     setEditData({
       name: record.name,
       email: record.email,
+      address: record.address,
       phone: record.phone,
     });
     setSelectedDonorId(record._id);
@@ -130,7 +132,7 @@ const DonorList = () => {
                       </th>
                       <th
                         scope="col"
-                        className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
+                        className="px-6 w-[15%] py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"
                       >
                         Phone
                       </th>
@@ -209,7 +211,7 @@ const DonorList = () => {
 
             {/* Modal */}
             <div className="fixed inset-0 flex items-center justify-center z-50">
-              <div className="bg-white border-2 dark:border-slate-500 border-gray-200 dark:bg-slate-700 p-6 rounded-xl shadow-lg w-96 relative">
+              <div className="bg-white border-2 dark:border-slate-500 border-gray-200 dark:bg-slate-700 p-6 rounded-3xl shadow-lg w-96 relative">
                 <div className="flex justify-between mb-4 items-center">
                   <h3 className="font-bold dark:text-white text-xl">Update Donor</h3>
                   <button
@@ -243,6 +245,19 @@ const DonorList = () => {
                       placeholder="user@example.com"
                       value={editData.email}
                       onChange={handleInputChange}
+                    />
+                  </div>
+
+                  {/* address Input */}
+                  <div className="mb-4">
+                    <InputType
+                      labelText="Address"
+                      labelFor="address"
+                      inputType="text"
+                      name="address"
+                      placeholder="Enter address"
+                      value={editData.address}
+                      onChange={(e) => handleInputChange(e)}
                     />
                   </div>
 
