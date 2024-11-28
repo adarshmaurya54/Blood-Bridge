@@ -72,7 +72,7 @@ const Modal = ({ modalTitle, buttonName, buttonIcon, getBloodReacords }) => {
       {/* Modal */}
       {showModal && (
         <div className="fixed p-4 md:p-0 inset-0 flex items-center justify-center z-50 bg-black backdrop-blur-sm bg-opacity-20">
-          <div className="relative w-full max-w-lg p-4 mx-auto border-2 dark:border-slate-500 border-gray-200 bg-white dark:bg-slate-700 rounded-xl shadow-lg">
+          <div className="relative w-full max-w-lg p-4 mx-auto border-2 dark:border-slate-500 border-gray-200 bg-white dark:bg-slate-700 rounded-3xl shadow-lg">
             {/* Close button */}
             <button
               onClick={toggleModal}
