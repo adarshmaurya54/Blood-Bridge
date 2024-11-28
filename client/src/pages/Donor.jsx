@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import Spinner from "../components/shared/Spinner";
-import API from "../services/API";
-import moment from "moment";
-import { BiSolidDonateBlood } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";// useEffect : handle side effects like API calls & useState : manage local state
+import { useSelector } from "react-redux"; // useSelector : Fetches data from the Redux store.
+import Spinner from "../components/shared/Spinner"; //Spinner: A loading spinner component.
+import API from "../services/API"; //API: Manages backend calls.
+import moment from "moment";//moment: A library for formatting dates.
+import { BiSolidDonateBlood } from "react-icons/bi";//A blood donation icon
+import { useNavigate } from "react-router-dom";//useNavigate: Used for navigation between pages in the React Router.
 
-const Donor = () => {
-  const { loading, user } = useSelector((state) => state.auth);
-  const [data, setData] = useState([]);
-  const navigate = useNavigate();
-  if (user?.role === "hospital") navigate("/");
+
+const Donor = () => { //Donor Component 
+  const { loading, user } = useSelector((state) => state.auth);//loading:Indicates if data is still loading & user:current logged-in user’s details.
+  const [data, setData] = useState([]);//data: Stores the list of donors fetched from the backend.
+  const navigate = useNavigate();//navigate: Used to redirect users to another page.
+  if (user?.role === "hospital") navigate("/");//only donor can login 
   // find donor records
-  const getDonors = async () => {
+  const getDonors = async () => {  //asynchronous arrow function
     try {
-      const { data } = await API.get("/inventory/get-donors");
+      const { data } = await API.get("/inventory/get-donors");//sends a GET request to the server, await:function waits for the promise to resolve or reject 
       if (data?.success) {
         setData(data?.donors);
       }
@@ -22,7 +23,7 @@ const Donor = () => {
       console.log(error);
     }
   };
-  useEffect(() => {
+  useEffect(() => { //any changes we want to do getDonors() call
     getDonors();
   }, []);
 
@@ -68,7 +69,7 @@ const Donor = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-black/25 dark:divide-neutral-700">
-                    {data?.map((record) => (
+                    {data?.map((record) => ( //maps all the arrays data rowise 
                       <tr key={record._id}>
                         <td className="px-6 py-4 capitalize whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
                           {record.name || record.organisationName + " (ORG)"}
